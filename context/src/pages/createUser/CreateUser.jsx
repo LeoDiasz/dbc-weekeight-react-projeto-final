@@ -1,6 +1,9 @@
-import {useAuth} from "../../hooks/useAuth"
 import {Formik, Form, Field} from "formik"
+import { Toaster, toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup"
+import {useAuth} from "../../hooks/useAuth"
+import {api} from "../../services/api"
 
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -13,13 +16,25 @@ const SignupSchema = Yup.object().shape({
     .required('Required')
 });
 
+export const CreateUser = () => {
+  const navigate = useNavigate()
+  const createAccount = async (datasUser) => {
 
-export const Login = () => {
-  const {signIn} = useAuth()
+    try {
+      const {data: result} = await api.post("/auth/create", datasUser)
+
+      navigate("/")
+      toast.success("Usuário cadastrado com sucesso!")
+      
+    } catch(Error) {
+      toast.error("Não foi possivel cadastrar!")
+    }
+  }
 
   return (
     <div>
-      <h1>Acessar conta</h1>
+      <Toaster/>
+      <h1>Criar conta</h1>
       <Formik
        initialValues={{
          login: '',
@@ -27,20 +42,20 @@ export const Login = () => {
        }}
        validationSchema={SignupSchema}
        onSubmit={values => {
-         signIn(values)
+         createAccount(values)
        }}>
         {({ errors, touched }) => (
           <Form>
-            <Field name="login" placeholder="Digite seu login"/>
+            <Field name="login" placeholder="Digite o nome para login"/>
             {errors.login && touched.login && (
               <div>{errors.login}</div>
             )}
 
-            <Field name="senha" type="password" placeholder="Digite sua senha"/>
+            <Field name="senha" type="password" placeholder="Digite uma senha"/>
             {errors.senha && touched.senha && (
               <div>{errors.senha}</div>
               )}
-            <button type="submit">Entrar</button>
+            <button type="submit">Criar conta</button>
           </Form>
         )}
      </Formik>
