@@ -8,10 +8,8 @@ export const Header = () => {
     <header style={{display: "flex"}}>
       <nav>
         <ul>
-          {!token && <li><Link to="/">Login</Link></li>}
-          {!token && <li><Link to="/cadastrar">Cadastrar usuários</Link></li>}
-          {token && <li><Link to="/endereco">Endereço</Link></li> }
-          {token && <li><Link to="/pessoa">Pessoa</Link></li>}
+          {token ? <li><Link to="/endereco">Endereço</Link></li> : <li><Link to="/">Login</Link></li>}
+          {token ?<li><Link to="/pessoa">Pessoa</Link></li> : <li><Link to="/cadastrar">Cadastrar usuários</Link></li>}
         </ul>
       </nav>
       {token && <button style={{cursor: "pointer"}} onClick={signOut}>Sair</button>}

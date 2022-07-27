@@ -10,7 +10,7 @@ export const Address = () => {
 
     const newCep = cep.replace(/[^0-9]/gi, "");
 
-    if(newCep.length != 8) {
+    if(newCep.length !== 8) {
       return
     }
     

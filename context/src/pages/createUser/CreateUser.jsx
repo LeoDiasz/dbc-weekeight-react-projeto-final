@@ -2,7 +2,6 @@ import {Formik, Form, Field} from "formik"
 import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup"
-import {useAuth} from "../../hooks/useAuth"
 import {api} from "../../services/api"
 
 const SignupSchema = Yup.object().shape({
@@ -21,11 +20,11 @@ export const CreateUser = () => {
   const createAccount = async (datasUser) => {
 
     try {
-      const {data: result} = await api.post("/auth/create", datasUser)
+      await api.post("/auth/create", datasUser)
 
       navigate("/")
       toast.success("Usuário cadastrado com sucesso!")
-      
+
     } catch(Error) {
       toast.error("Não foi possivel cadastrar!")
     }
