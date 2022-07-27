@@ -2,6 +2,6 @@
 
 export const Home = () => {
   return (
-    <div>dadsa</div>
+    <div>Seja bem vindo!</div>
   )
 }

@@ -41,6 +41,7 @@ const AuthProvider = ({children}) => {
     
     if (token) {
       localStorage.removeItem("token")
+      setToken()
       toast("Até logo!")
       navigate("/")
     }
