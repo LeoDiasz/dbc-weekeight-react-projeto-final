@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom"
+import {BrowserRouter, Routes, Route, Navigate, Outlet, useNavigate} from "react-router-dom"
 import { AuthProvider } from "./context/AuthContext"
 import { Login } from "./pages/login/Login"
 import { CreateUser } from "./pages/createUser/CreateUser"
@@ -20,7 +20,6 @@ export const Routers = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Header/>
         <Routes>
           <Route path="/" element={<Login/>}/>
           <Route path="/cadastrar" element={<CreateUser/>}/>

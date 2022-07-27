@@ -1,6 +1,9 @@
 import {useAuth} from "../../hooks/useAuth"
-import {Formik, Form, Field} from "formik"
+import {Formik, Field} from "formik"
 import * as Yup from "yup"
+import { Logo } from "../../components/Logo/Logo";
+import {DivContent, FormContent, SectionLogin} from "./login.styled"
+import { Link } from "react-router-dom";
 
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -18,32 +21,37 @@ export const Login = () => {
   const {signIn} = useAuth()
 
   return (
-    <div>
-      <h1>Acessar conta</h1>
-      <Formik
-       initialValues={{
-         login: '',
-         senha: '',  
-       }}
-       validationSchema={SignupSchema}
-       onSubmit={values => {
-         signIn(values)
-       }}>
-        {({ errors, touched }) => (
-          <Form>
-            <Field name="login" placeholder="Digite seu login"/>
-            {errors.login && touched.login && (
-              <div>{errors.login}</div>
-            )}
+    <SectionLogin>
+      
+      <DivContent>
+          <Logo />
 
-            <Field name="senha" type="password" placeholder="Digite sua senha"/>
-            {errors.senha && touched.senha && (
-              <div>{errors.senha}</div>
-              )}
-            <button type="submit">Entrar</button>
-          </Form>
-        )}
-     </Formik>
-    </div>
+          <div>
+            <h1>Entre no Dashboard Kit</h1>
+            <p>Logue com seu nome e senha</p>
+          </div>
+          
+          <Formik initialValues={{login: '', senha: ''}} validationSchema={SignupSchema} onSubmit={values => {signIn(values)}}>
+            {({ errors, touched }) => (
+              <FormContent>
+                <div>
+                  <label htmlFor="login">Nome</label>
+                  <Field name="login" placeholder="Digite seu login"/>
+                </div>
+
+                <div>
+                  <label htmlFor="senha">Senha</label>
+                  <Field name="senha" type="password" placeholder="Digite sua senha"/>
+                </div>
+
+                <button type="submit">Entrar</button>
+              </FormContent>
+            )}
+          </Formik>
+          <Link to="/cadastrar">Não possui conta? <span>Criar</span></Link>
+      </DivContent>
+      
+    </SectionLogin>
+
   )
 }
