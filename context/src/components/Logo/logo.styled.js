@@ -7,7 +7,7 @@ export const StyledLink = styled(Link)`
   align-items: center;
   justify-content: center;
   gap: 5px;
-  flex-direction: ${props => props.direction && "column"};
+  flex-direction: ${(props) => (props.direction === "column" ? "column" : "row")};
   text-decoration: none;
 
   img {

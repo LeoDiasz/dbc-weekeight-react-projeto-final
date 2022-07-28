@@ -24,7 +24,7 @@ export const Login = () => {
     <SectionLogin>
       
       <DivContent>
-          <Logo />
+          <Logo direction="column"/>
 
           <div>
             <h1>Entre no Dashboard Kit</h1>

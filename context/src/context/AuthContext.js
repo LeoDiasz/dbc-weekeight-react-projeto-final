@@ -14,6 +14,7 @@ const AuthProvider = ({children}) => {
 
     if (token) {
       setToken(token)
+      api.defaults.headers.common["authorization"] = token
       navigate("/home")
     }
 
@@ -22,11 +23,13 @@ const AuthProvider = ({children}) => {
   const signIn = async (userDatas) => {
     try {
       
-      const {data: result} = await api.post("/auth", userDatas)
-      const [, newToken] = result.split(" ")
+      const {data: token} = await api.post("/auth", userDatas)
+    
       
-      localStorage.setItem("token", newToken)
-      setToken(newToken)
+      localStorage.setItem("token", token)
+      setToken(token)
+      
+      api.defaults.headers.common["authorization"] = token
 
       navigate("/home")
       toast.success("Seja bem vindo!")
@@ -42,6 +45,7 @@ const AuthProvider = ({children}) => {
     if (token) {
       localStorage.removeItem("token")
       setToken()
+      api.defaults.headers.common["authorization"] = undefined
       toast("Até logo!")
       navigate("/")
     }

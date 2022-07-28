@@ -1,7 +1,14 @@
-
+import { SideBar } from "../../components/SideBar/SideBar"
+import {DivContainer} from "./home.styled"
 
 export const Home = () => {
   return (
-    <div>Seja bem vindo!</div>
+    <DivContainer>
+      <SideBar/>
+      <main>
+        <h1>Seja bem vindo!</h1>
+      </main>
+    </DivContainer>
+    
   )
 }
