@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-
-
 const NavContent = styled.nav`
   display: flex;
   flex-direction: column;
@@ -10,6 +8,16 @@ const NavContent = styled.nav`
   background-color: #363740;
   width: 35vh;
   gap: 60px;
+
+  button {
+    width: 100px;
+    height: 30px;
+    background-color: #3751FF;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+  }
 `
 
 const ListContent = styled.ul`

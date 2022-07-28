@@ -3,9 +3,8 @@ import {Toaster, toast} from "react-hot-toast"
 import {FiMoreVertical} from "react-icons/fi"
 import {useState} from "react"
 import { api } from "../../services/api"
-import {ModalPerson} from "../Modal/Modal"
 
-export const CardPerson = ({person}) => {
+export const CardPerson = ({person, update, getDatas}) => {
   const [showButtons, setShowButtons] = useState(false)
   
   const deletePerson = async (id) => {
@@ -15,6 +14,8 @@ export const CardPerson = ({person}) => {
       await api.delete(`/pessoa/${id}`)
 
       toast.success("Pessoa deletada com sucesso.")
+      update.setUpdateList(update.updateList + 1)
+      setShowButtons(false)
 
     } catch {
 
@@ -35,12 +36,12 @@ export const CardPerson = ({person}) => {
         <ButtonStyle color="#F12B2C" onClick={event => deletePerson(person.idPessoa)}>
             <span>Excluir pessoa</span>
         </ButtonStyle>
-        <ButtonStyle color="#29CC97">
+        <ButtonStyle color="#29CC97" onClick={event => getDatas(person)}>
           <span>Atualizar pessoa</span>
         </ButtonStyle>
       </div>}
     
-      <button onClick={event => setShowButtons(showButtons == true ? false : true)}>
+      <button onClick={event => setShowButtons(showButtons === true ? false : true)}>
         <FiMoreVertical/>
       </button>
    
