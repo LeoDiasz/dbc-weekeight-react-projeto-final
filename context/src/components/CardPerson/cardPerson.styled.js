@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 const PersonContent = styled.li`
   display: grid;
-  grid-template-columns: 2fr 1.5fr repeat(2, 1fr) 60px 1fr;
+  grid-template-columns: 2fr 300px repeat(2, 1fr) 60px 1fr;
   gap: 40px;
   padding: 0 40px;
   align-items: center;
