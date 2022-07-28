@@ -1,11 +1,10 @@
-import {BrowserRouter, Routes, Route, Navigate, Outlet, useNavigate} from "react-router-dom"
+import {BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom"
 import { AuthProvider } from "./context/AuthContext"
 import { Login } from "./pages/login/Login"
 import { CreateUser } from "./pages/createUser/CreateUser"
 import { Home } from "./pages/home/Home"
 import { Address } from "./pages/address/Address"
 import { Person } from "./pages/person/Person"
-import { Header } from "./components/Header/Header"
 import {useAuth} from "./hooks/useAuth"
 
 const PrivateRoute = () => {

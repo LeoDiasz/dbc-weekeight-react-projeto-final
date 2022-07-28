@@ -44,16 +44,19 @@ export const Person = () => {
     } catch(Error) {
       toast.error("Não foi possivel cadastrar o usuário")
     }
+
   }
 
   const updatePerson = async(values) => {
 
     const idPessoa = parseInt(values.idPessoa)
 
+    values.cpf = values.cpf.replace(/[^0-9]/gi, "")
+
     const newValue = {email: values.email, nome: values.nome, dataNascimento: values.dataNascimento, cpf: values.cpf}
 
     try {
-     
+      debugger
       await api.put(`/pessoa/${idPessoa}`, newValue)
 
       toast.success("Pessoa atualizada com sucesso")
@@ -62,11 +65,13 @@ export const Person = () => {
 
     } catch(error) {
       setChooseOptions(true)
+      toast.error("Erro ao atualizar")
     }
+
 
   }
 
-  const getDatasPersonUpdate = (datas) => {
+  const getDatasPersonUpdate = (datas, setState) => {
     setDatasPersonUpdate(datas)
     setChooseOptions(false)
 
@@ -75,9 +80,23 @@ export const Person = () => {
     formik.values.email = datas.email
     formik.values.dataNascimento = datas.dataNascimento
     formik.values.idPessoa = datas.idPessoa
+
+    if(setState) {
+      setState(false)
+    }
   }
   
-  const formik = useFormik({initialValues: {nome: "", dataNascimento: "", cpf: "", email: "", idPessoa: ""}, onSubmit: values => chooseOptions ? registerPerson(values) : updatePerson(values)})
+  const formik = useFormik(
+  {initialValues: {nome: "", dataNascimento: "", cpf: "", email: "", idPessoa: ""}, 
+  onSubmit: async values => {
+    if(chooseOptions) {
+      await registerPerson(values)
+    } else {
+      await updatePerson(values)
+    }
+    
+    formik.resetForm({values: { nome: "", dataNascimento: "", cpf: "", email: "", idPessoa: ""}})
+  }})
   
   useEffect(() => {
     searchPeople()

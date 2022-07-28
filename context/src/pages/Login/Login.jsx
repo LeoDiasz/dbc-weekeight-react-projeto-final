@@ -16,7 +16,6 @@ const SignupSchema = Yup.object().shape({
     .required('Required')
 });
 
-
 export const Login = () => {
   const {signIn} = useAuth()
 
