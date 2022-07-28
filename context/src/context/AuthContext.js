@@ -7,11 +7,14 @@ const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
   const [token, setToken] = useState()
+  const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
   useEffect(() => {
     const token = localStorage.getItem("token")
 
+    setLoading(false)
+    
     if (token) {
       setToken(token)
       api.defaults.headers.common["authorization"] = token
@@ -50,6 +53,10 @@ const AuthProvider = ({children}) => {
       navigate("/")
     }
   
+  }
+  
+  if (loading) {
+    return
   }
 
   return (
