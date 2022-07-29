@@ -3,9 +3,10 @@ import {Form} from "formik"
 
 const SectionPagesBackgroundBlack = styled.section`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #363740;
+  align-items: ${props => props.alignItems ? props.alignItems : "center"};
+  justify-content: ${props => props.justifyContent ? props.justifyContent : "center"};
+  background-color: ${props => props.backgroundColor ? props.backgroundColor : "#363740"};
+  flex-direction: ${props => props.direction && props.direction};
   min-height: 100vh;
   text-align: center;
 `
