@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react"
 import { useParams } from "react-router-dom"
 import {useContextPeople} from "../../hooks/useContextPeople"
+import { ContainerAroundPagesWithSideBar } from "../../components/containerAroundPagesWithSideBar/ContainerAroundPagesWithSideBar"
+import { SectionMainPagesWithSideBar } from "../../components/sectionMainPagesWithSideBar/SectionMainPagesWithSideBar.styled"
 
 export const PeopleForm = () => {
   const [personDatasUpdate, setPersonDatasUpdate] = useState()
@@ -16,8 +18,10 @@ export const PeopleForm = () => {
   }, [])
 
   return (
-    <section>
-        <h1>People</h1>
-    </section>
+    <ContainerAroundPagesWithSideBar>
+      <SectionMainPagesWithSideBar>
+
+      </SectionMainPagesWithSideBar>
+    </ContainerAroundPagesWithSideBar>
   )
 }

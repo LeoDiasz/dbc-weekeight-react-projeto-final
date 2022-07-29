@@ -1,14 +1,12 @@
-import { SideBar } from "../../components/SideBar/SideBar"
-import {DivContainer} from "./home.styled"
+import { ContainerAroundPagesWithSideBar } from "../../components/containerAroundPagesWithSideBar/ContainerAroundPagesWithSideBar"
+import { MainPageWithSideBar } from "../../components/sectionMainPagesWithSideBar/SectionMainPagesWithSideBar.styled"
 
 export const Home = () => {
   return (
-    <DivContainer>
-      <SideBar/>
-      <main>
-        <h1>Seja bem vindo!</h1>
-      </main>
-    </DivContainer>
-    
+    <ContainerAroundPagesWithSideBar>
+      <MainPageWithSideBar>
+          <h2>teste</h2>
+      </MainPageWithSideBar>
+    </ContainerAroundPagesWithSideBar>
   )
 }

@@ -1,25 +1,7 @@
 import styled from "styled-components"
+import {ContainerForFormAndLists} from "../../components/containerForFormAndLists/ContainerForFormAndLists.styled"
 
-const SectionContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
-  padding: 40px 50px;
-
-  > header {
-    display: flex;
-    justify-content: space-between;
-  }
-
-`
-
-const SectionListPeople = styled.section`
-
-
-  background-color: #fff;
-  border-radius: 8px;
-  border: 1px solid #DFE0EB;
-  padding: 40px 0 70px;
+const SectionListPeople = styled(ContainerForFormAndLists)`
 
   > *:first-child {
       padding: 0 40px;
@@ -85,4 +67,4 @@ const FormStyle = styled.form`
   }
   
 `
-export {SectionContainer, SectionListPeople, FormStyle}
+export {SectionListPeople, FormStyle}

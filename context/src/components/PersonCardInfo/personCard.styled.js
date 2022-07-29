@@ -1,14 +1,14 @@
 import styled from "styled-components"
 
 const PersonContent = styled.li`
-  display: grid;
   grid-template-columns: 2fr 300px repeat(2, 1fr) 60px 1fr;
+  display: grid;
   gap: 40px;
-  padding: 0 40px;
   align-items: center;
-  text-align: left;
+  padding: 0 40px;
   height: 92px;
   width: 100%;
+  text-align: left;
   border-bottom: 1px solid #DFE0EB;
   cursor: pointer;
   transition: 0.3s;

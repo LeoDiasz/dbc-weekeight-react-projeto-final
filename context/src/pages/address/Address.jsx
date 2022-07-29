@@ -1,45 +1,15 @@
 import {Formik, Form, Field} from "formik"
 import {IMaskInput} from "react-imask"
-import axios from "axios";
-import { DivContainer } from "../home/home.styled";
-import { SideBar } from "../../components/SideBar/SideBar";
+import { ContainerAroundPagesWithSideBar } from "../../components/containerAroundPagesWithSideBar/ContainerAroundPagesWithSideBar"
+import { SectionMainPagesWithSideBar } from "../../components/sectionMainPagesWithSideBar/SectionMainPagesWithSideBar.styled"
 
 export const Address = () => {
 
-  const searchDatasAddress = async (event, setFieldValue) => {
-
-    const cep = event.target.value
-
-    const newCep = cep.replace(/[^0-9]/gi, "");
-
-    if(newCep.length !== 8) {
-      return
-    }
-    
-    try {
-      const {data: result} = await axios.get(`https://viacep.com.br/ws/${newCep}/json/`)
-
-      setFieldValue("cidade", result.localidade)
-      setFieldValue("estado", result.uf)
-      setFieldValue("complemento", result.complemento)
-      setFieldValue("logradouro", result.logradouro)
-
-    } catch(error) {
-      console.log(error)
-    }
-    
-  }
-
-  const createAddress = (datasAddress) => {
-    //
-  }
-
   return (
-    <DivContainer>
-      <SideBar/>
-      <section>
+    <ContainerAroundPagesWithSideBar>
+      <SectionMainPagesWithSideBar>
         <h1>Criar endereço</h1>
-        <Formik
+        {/* <Formik
         initialValues={{
           idPessoa: "",
           tipo: "",
@@ -98,9 +68,12 @@ export const Address = () => {
               <button type="submit" disabled>Criar Endereço</button>
             </Form>
           )}
-      </Formik>
-    </section>
-    </DivContainer>
+      </Formik> */}
+      </SectionMainPagesWithSideBar>
+    </ContainerAroundPagesWithSideBar>
+    
+      
+ 
    
   )
 }

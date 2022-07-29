@@ -1,5 +1,5 @@
 import {SectionListPeople} from "../person.styled"
-import { PersonCardInfo } from "../../../components/PersonCardInfo/PersonCardInfo"
+import { PersonCardInfo } from "../../../components/personCardInfo/PersonCardInfo"
 
 export const ListPeople = ({listPeopleDatas}) => {
 
