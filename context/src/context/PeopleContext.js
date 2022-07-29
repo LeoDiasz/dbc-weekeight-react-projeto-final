@@ -7,6 +7,7 @@ const PeopleContext = createContext()
 
 const PeopleProvider = ({children}) => {
   const [listPeople, setListPeople] = useState()
+  const [personDatasUpdate, setPersonDatasUpdate] = useState()
 
   const handleCreatePerson = async (personDatas) => {
 
@@ -66,7 +67,7 @@ const PeopleProvider = ({children}) => {
 
   }
   
-  const getPersonForId = async (id, setState) => {
+  const getPersonForId = async (id, setState = setPersonDatasUpdate) => {
     
     if(!id) {
       return

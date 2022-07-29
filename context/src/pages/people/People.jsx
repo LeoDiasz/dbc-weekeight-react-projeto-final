@@ -4,7 +4,7 @@ import { useContextPeople } from "../../hooks/useContextPeople";
 import { ListPeople } from "./components/ListPeople";
 import { ContainerAroundPagesWithSideBar } from "../../components/containerAroundPagesWithSideBar/ContainerAroundPagesWithSideBar";
 import { SectionMainPagesWithSideBar } from "../../components/sectionMainPagesWithSideBar/SectionMainPagesWithSideBar.styled";
-import { HeaderPages } from "../../headerPages/HeaderPages.styled";
+import { HeaderPages } from "../../components/headerPages/HeaderPages.styled";
 import { Button } from "../../components/button/Button.styled";
 
 export const People = () => {

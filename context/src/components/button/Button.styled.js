@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { colorPrimary } from "../../consts"
 
-export const Button = styled.button`
+const Button = styled.button`
   width: ${props => props.width ? props.width : "100%"};
   height : ${props => props.height && props.height};
   background-color: ${props => props.backgroundColor ? props.backgroundColor : colorPrimary};
@@ -20,4 +20,11 @@ export const Button = styled.button`
   }
 `
 
+const ButtonWithIcon = styled(Button)`
+  border-radius: 15px;
+  width: 50px;
+  font-size: 20px;
+`
+
+export {ButtonWithIcon, Button} 
 
