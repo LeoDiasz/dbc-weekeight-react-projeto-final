@@ -1,29 +1,33 @@
-import {useEffect, useState} from "react"
-import { useParams } from "react-router-dom"
+import {useEffect} from "react"
 import {useFormik} from "formik"
 import {IMaskInput} from "react-imask"
 import {useContextPeople} from "../../../hooks/useContextPeople"
 import { Button } from "../../../components/button/Button.styled"
 import { FormStyle } from "../person.styled"
 
-export const FormPeople = () => {
-  const { id } = useParams()
-  const [isUpdate, setIsUpdate] = useState(false) 
-  const [personDatasUpdate, setPersonDatasUpdate] = useState()
-  const {getPersonForId, handleUpdatePerson, handleCreatePerson} = useContextPeople()
-
-  const formik = useFormik({initialValues: {nome: "", dataNascimento: "", cpf: "", email: "", idPessoa: ""}, onSubmit: async (values) => {
-    isUpdate ? await handleUpdatePerson(values) : await handleCreatePerson(values)
-    formik.resetForm({values: { nome: "", dataNascimento: "", cpf: "", email: "", idPessoa: ""}})
-  }})
+export const FormPeople = ({isUpdate, personDatasUpdate}) => {
+  const { handleUpdatePerson, handleCreatePerson} = useContextPeople()
 
   useEffect(() => {
-    if(id) {
-      setIsUpdate(true)
-      getPersonForId(id, setPersonDatasUpdate)
-     
-    }
-  }, [])
+  }, [personDatasUpdate])
+
+  if(!personDatasUpdate && isUpdate) {
+    return
+  }
+
+  const {idPessoa, email, nome, dataNascimento, cpf} = personDatasUpdate
+
+  const formik = useFormik(
+    {initialValues: 
+      {nome: "", 
+      dataNascimento:  "", 
+      cpf:  "", 
+      email: "", 
+      idPessoa:  ""}, 
+      onSubmit: async (values) => {
+        isUpdate ? await handleUpdatePerson(values) : await handleCreatePerson(values)
+        formik.resetForm({values: { nome: "", dataNascimento: "", cpf: "", email: "", idPessoa: ""}})
+    }})
 
   return (
     <FormStyle onSubmit={formik.handleSubmit}>

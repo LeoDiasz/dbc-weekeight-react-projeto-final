@@ -69,19 +69,13 @@ const PeopleProvider = ({children}) => {
   
   const getPersonForId = async (id, setState = setPersonDatasUpdate) => {
     
-    if(!id) {
-      return
-    }
-
     try {
       const {data: [personDatas]} = await api.get(`/pessoa/lista-completa?${id}`)
       const {cpf, email, dataNascimento, nome, idPessoa} = personDatas
       const personDatasFiltered = {cpf, email, dataNascimento, nome, idPessoa}
 
-      if (setState) {
-        setState(personDatasFiltered)
-      }
-
+      setState(personDatasFiltered)
+      
     } catch {
       toast.error("Não foi possivel encontrar essa pessoa")
     }
@@ -103,7 +97,7 @@ const PeopleProvider = ({children}) => {
   }
 
   return (
-    <PeopleContext.Provider value={{handleCreatePerson, handleDeletePerson, getPersonForId, getPeople, listPeople, setListPeople, handleUpdatePerson}}>
+    <PeopleContext.Provider value={{handleCreatePerson, handleDeletePerson, getPersonForId, getPeople, listPeople, setListPeople, handleUpdatePerson, personDatasUpdate, setPersonDatasUpdate}}>
       {children}
     </PeopleContext.Provider>
   )
