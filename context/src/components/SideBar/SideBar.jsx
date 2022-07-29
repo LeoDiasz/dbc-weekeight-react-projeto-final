@@ -8,13 +8,11 @@ export const SideBar = () => {
   return (
     <NavContent>
       <Logo/>
-
       <ListContent>
         <li><Link to="/endereco">Endereço</Link></li>
         <li><Link to="/pessoas">Pessoas</Link></li>
         <li><Link to="/home">Home</Link></li> 
       </ListContent>
-
       <button onClick={signOut}>Sair</button>
     </NavContent>
   )
