@@ -12,7 +12,6 @@ const AuthProvider = ({children}) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token")
-
     setLoading(false)
     
     if (token) {
@@ -26,8 +25,7 @@ const AuthProvider = ({children}) => {
     try {
       
       const {data: token} = await api.post("/auth", userDatas)
-    
-      
+
       localStorage.setItem("token", token)
       setToken(token)
       

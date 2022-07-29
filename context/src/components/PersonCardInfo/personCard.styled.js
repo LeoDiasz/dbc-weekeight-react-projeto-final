@@ -1,13 +1,13 @@
 import styled from "styled-components"
 
 const PersonContent = styled.li`
-  grid-template-columns: 2fr 300px repeat(2, 1fr) 60px 1fr;
   display: grid;
+  grid-template-columns: 2fr 300px repeat(2, 1fr) 150px 50px;
   gap: 40px;
   align-items: center;
-  padding: 0 40px;
   height: 92px;
   width: 100%;
+  padding: 0 40px;
   text-align: left;
   border-bottom: 1px solid #DFE0EB;
   cursor: pointer;
@@ -18,44 +18,26 @@ const PersonContent = styled.li`
     background-color: #F7F8FC;
   }
 
-
   > div {
     display: flex;
     gap: 10px;
     align-items: center;
   }
-
-  button {
-    border: none;
-  }
-
-   > *:last-child { 
-    background-color: transparent;
-    font-size: 30px;
-    transition: 0.3s;
-    cursor: pointer;
-    position: absolute;
-    right: 40px;
-     
-  }
-
-  > *:last-child:hover {
-    color: #29CC97;
-  }
 `
 
-const ButtonStyle = styled.button`
-  background-color: ${props => (props.color && props.color)};
-  color: #fff;
-  border-radius: 8px;
-  padding: 5px 20px;
+const ButtonWithIcon = styled.button`
+  border: none;
+  background-color: transparent;
+  font-size: 30px;
+  transition: 0.3s;
   cursor: pointer;
-  transition: filter 0.3s;
+  position: absolute;
+  right: 40px;
 
   &:hover {
-    filter: brightness(0.9)
+    color: #29CC97;
   }
+
 `
 
-
-export {ButtonStyle, PersonContent}
+export {PersonContent, ButtonWithIcon}

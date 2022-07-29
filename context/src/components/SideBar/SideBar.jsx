@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom"
 import {useContextAuth} from "../../hooks/useContextAuth"
-import {Logo} from "../Logo/Logo"
+import { Button } from "../button/Button.styled"
+import {Logo} from "../logo/Logo"
 import {NavContent, ListContent} from "./sideBar.styled"
 
 export const SideBar = () => {
   const {signOut} = useContextAuth()
+
   return (
     <NavContent>
       <Logo/>
@@ -13,7 +15,7 @@ export const SideBar = () => {
         <li><Link to="/pessoas">Pessoas</Link></li>
         <li><Link to="/home">Home</Link></li> 
       </ListContent>
-      <button onClick={signOut}>Sair</button>
+      <Button width="200px" onClick={signOut}>Sair</Button>
     </NavContent>
   )
 }

@@ -1,15 +1,16 @@
 import {SectionListPeople} from "../person.styled"
 import { PersonCardInfo } from "../../../components/personCardInfo/PersonCardInfo"
+import { ContainerForFormAndLists } from "../../../components/containerForFormAndLists/ContainerForFormAndLists.styled"
 
 export const ListPeople = ({listPeopleDatas}) => {
 
   return (
-    <SectionListPeople>
-      <h3>Lista pessoas</h3>
+    <ContainerForFormAndLists padding="40px 0" display="flex" direction="column" gap="20px">
+      <h3 style={{padding: "0 40px"}}>Lista pessoas</h3>
 
       {listPeopleDatas ? 
         <ul>
-          <PersonCardInfo person={{nome: "Nome", email: "Email", dataNascimento: "Data nascimento", cpf: "Cpf"}}/>
+          <PersonCardInfo person={{nome: "Nome", email: "Email", dataNascimento: "Data nascimento", cpf: "Cpf"}} no/>
 
           {listPeopleDatas.map((person, i) => (
             <PersonCardInfo key={i} person={person}/>
@@ -17,6 +18,6 @@ export const ListPeople = ({listPeopleDatas}) => {
         </ul> 
       
       : <h2>Nenhuma pessoa cadastrada</h2>}
-    </SectionListPeople>
+    </ContainerForFormAndLists >
   )
 }

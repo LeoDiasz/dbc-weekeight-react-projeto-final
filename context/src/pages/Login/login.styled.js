@@ -1,46 +1,13 @@
 import styled from "styled-components"
 import {Form} from "formik"
 
-
-const SectionLogin = styled.section`
+const SectionPagesBackgroundBlack = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #363740;
-  height: 100vh;
-  
+  min-height: 100vh;
   text-align: center;
-`
-
-const DivContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 30px;
-  gap: 40px;
-  background-color: #fff;
-  height: 582px;  
-  width: 380px;
-  border-radius: 8px;
-  border: 1px solid #DFE0EB;
-
-  * {
-    width: 100%;
-
-  }
-
-  
-  > *:last-child {
-    color: #9FA2B4;
-    text-decoration: none;
-
-    span {
-      color: #3751FF;
-      font-weight: bold;
-    }
-
-  }
-
 `
 
 const FormContent = styled(Form)`
@@ -53,20 +20,9 @@ const FormContent = styled(Form)`
     text-align: left;
   }
 
-  input, button {
+  input {
     width: 100%;
     border-radius: 8px;
-  }
-  
-  button {
-    height: 48px;
-    background-color: #3751FF;
-    color: #fff;
-    cursor: pointer;
-    border: none;
-  }
-
-  input {
     height: 42px;
     padding: 0 20px;
     margin-top: 10px;
@@ -80,4 +36,4 @@ const FormContent = styled(Form)`
 
 `
 
-export {SectionLogin, DivContent, FormContent}
+export {SectionPagesBackgroundBlack, FormContent}

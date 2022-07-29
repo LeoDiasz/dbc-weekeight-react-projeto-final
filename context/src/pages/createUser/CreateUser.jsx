@@ -1,8 +1,11 @@
 import {Formik, Form, Field} from "formik"
-import { Toaster, toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import {toast } from "react-hot-toast";
+import { useNavigate, Link } from "react-router-dom";
 import * as Yup from "yup"
 import {api} from "../../services/api"
+import { ContainerForFormAndLists } from "../../components/containerForFormAndLists/ContainerForFormAndLists.styled";
+import { FormContent, SectionPagesBackgroundBlack } from "../login/login.styled";
+import { Button } from "../../components/button/Button.styled";
 
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -17,6 +20,7 @@ const SignupSchema = Yup.object().shape({
 
 export const CreateUser = () => {
   const navigate = useNavigate()
+
   const createAccount = async (datasUser) => {
 
     try {
@@ -31,33 +35,35 @@ export const CreateUser = () => {
   }
 
   return (
-    <div>
-      <Toaster/>
-      <h1>Criar conta</h1>
-      <Formik
-       initialValues={{
-         login: '',
-         senha: '',  
-       }}
-       validationSchema={SignupSchema}
-       onSubmit={values => {
-         createAccount(values)
-       }}>
-        {({ errors, touched }) => (
-          <Form>
-            <Field name="login" placeholder="Digite o nome para login"/>
-            {errors.login && touched.login && (
-              <div>{errors.login}</div>
-            )}
+    <SectionPagesBackgroundBlack>
+      <ContainerForFormAndLists width="400px" height="500px" display="flex" direction="column" gap="30px">
+        <h1>Criar conta</h1>
+        <Formik
+        initialValues={{
+          login: '',
+          senha: '',  
+        }}
+        validationSchema={SignupSchema}
+        onSubmit={values => {
+          createAccount(values)
+        }}>
+          {({ errors, touched }) => (
+            <FormContent>
+              <div>
+                <label htmlFor="login">Nome</label>
+                <Field name="login" placeholder="Digite um nome para sua conta"/>
+              </div>
 
-            <Field name="senha" type="password" placeholder="Digite uma senha"/>
-            {errors.senha && touched.senha && (
-              <div>{errors.senha}</div>
-              )}
-            <button type="submit">Criar conta</button>
-          </Form>
-        )}
-     </Formik>
-    </div>
+              <div>
+                <label htmlFor="senha">Senha</label>
+                <Field name="senha" type="password" placeholder="Digite a senha"/>
+              </div>
+              <Button type="submit">Criar conta</Button>
+            </FormContent>
+          )}
+        </Formik>
+        <Link to="/">Voltar para login </Link>
+      </ContainerForFormAndLists>
+    </SectionPagesBackgroundBlack>
   )
 }
