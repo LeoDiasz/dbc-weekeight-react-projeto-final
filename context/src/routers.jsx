@@ -1,14 +1,17 @@
 import {BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom"
 import { AuthProvider } from "./context/AuthContext"
+import { PeopleProvider } from "./context/PeopleContext"
+import {useContextAuth} from "./hooks/useContextAuth"
 import { Login } from "./pages/login/Login"
-import { CreateUser } from "./pages/createUser/CreateUser"
 import { Home } from "./pages/home/Home"
+import { CreateUser } from "./pages/createUser/CreateUser"
 import { Address } from "./pages/address/Address"
-import { Person } from "./pages/person/Person"
-import {useAuth} from "./hooks/useAuth"
+import { People } from "./pages/people/People"
+import { PeopleForm } from "./pages/people/PeopleForm"
+import { NotFound } from "./pages/notFound/NotFound"
 
 const PrivateRoute = () => {
-  const {token} = useAuth()
+  const {token} = useContextAuth()
 
   return (
     token ? <Outlet/> : <Navigate to="/"/>
@@ -19,19 +22,20 @@ export const Routers = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Login/>}/>
-          <Route path="/cadastrar" element={<CreateUser/>}/>
-          <Route path="/home" element={<PrivateRoute/>}>
-            <Route path="/home" element={<Home/>} />
-          </Route>
-          <Route path="/endereco" element={<PrivateRoute/>}>
-            <Route path="/endereco" element={<Address/>} />
-          </Route>
-          <Route path="/pessoa" element={<PrivateRoute/>}>
-            <Route path="/pessoa" element={<Person/>} />
-          </Route>
-        </Routes>
+        <PeopleProvider>
+          <Routes>
+            <Route path="/" element={<Login/>}/>
+            <Route path="/cadastrar" element={<CreateUser/>}/>
+            <Route element={<PrivateRoute/>}>
+                <Route path="/home" element={<Home/>} />
+                <Route path="/endereco" element={<Address/>} />
+                <Route path="/pessoas" element={<People/>}/>
+                <Route path="/pessoas/criar" element={<PeopleForm/>}/>
+                <Route path="/pessoas/atualizar/:id" element={<PeopleForm/>}/>
+            </Route>
+            <Route path="*" element={<NotFound/>}/>
+          </Routes>
+        </PeopleProvider>
       </AuthProvider>
     </BrowserRouter>
     

@@ -18,7 +18,6 @@ const AuthProvider = ({children}) => {
     if (token) {
       setToken(token)
       api.defaults.headers.common["authorization"] = token
-      navigate("/home")
     }
 
   }, [])

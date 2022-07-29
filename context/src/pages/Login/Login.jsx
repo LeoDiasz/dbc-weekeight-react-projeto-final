@@ -1,9 +1,9 @@
-import {useAuth} from "../../hooks/useAuth"
+import { Link } from "react-router-dom";
 import {Formik, Field} from "formik"
 import * as Yup from "yup"
+import {useContextAuth} from "../../hooks/useContextAuth"
 import { Logo } from "../../components/Logo/Logo";
 import {DivContent, FormContent, SectionLogin} from "./login.styled"
-import { Link } from "react-router-dom";
 
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -17,11 +17,10 @@ const SignupSchema = Yup.object().shape({
 });
 
 export const Login = () => {
-  const {signIn} = useAuth()
+  const {signIn} = useContextAuth()
 
   return (
     <SectionLogin>
-      
       <DivContent>
           <Logo direction="column"/>
 
@@ -49,7 +48,6 @@ export const Login = () => {
           </Formik>
           <Link to="/cadastrar">Não possui conta? <span>Criar</span></Link>
       </DivContent>
-      
     </SectionLogin>
 
   )
