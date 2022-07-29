@@ -10,7 +10,7 @@ export const ListPeople = ({listPeopleDatas}) => {
 
       {listPeopleDatas ? 
         <ul>
-          <PersonCardInfo person={{nome: "Nome", email: "Email", dataNascimento: "Data nascimento", cpf: "Cpf"}} no/>
+          <PersonCardInfo person={{nome: "Nome", email: "Email", dataNascimento: "Data nascimento", cpf: "Cpf"}} notButtons/>
 
           {listPeopleDatas.map((person, i) => (
             <PersonCardInfo key={i} person={person}/>
