@@ -10,7 +10,8 @@ import { Button } from "../../components/Button/styles"
 import { Label, Input, MaskInput, InputField } from "../../components/Input/styles"
 
 export const Address = () => {
-  const {id, idAddress} = useParams()
+  const {id} = useParams()
+  const {idAddress} = useParams()
   const [isUpdate, setIsUpdate] = useState(false)
 
   const {handleCreateAddress , addressDatasUpdate, handleUpdateAddress, getAddressById} = useContextAddress()
@@ -41,9 +42,12 @@ export const Address = () => {
   
   const setup = async () => {
     if (id && idAddress) {
-      await getAddressById(idAddress)
-      setIsUpdate(true)
-    } 
+      try {
+        await getAddressById(idAddress)
+      } catch(Error) {
+        console.log(Error)
+      }
+    }
   } 
 
   useEffect(() => { 
@@ -55,9 +59,13 @@ export const Address = () => {
   }, [addressDatasUpdate])
 
   if(!addressDatasUpdate && isUpdate) {
-    console.log(addressDatasUpdate)
     return
   }
+
+  const addressDatas = addressDatasUpdate && addressDatasUpdate
+
+  debugger
+  const isUpdateAndHasDatasAddress = addressDatas && isUpdate
 
   return (
     <ContainerPagesWithSideBar>

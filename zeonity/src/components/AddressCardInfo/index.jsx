@@ -4,7 +4,7 @@ import { ButtonWithIcon } from "../Button/styles"
 import {RiDeleteBinLine, RiEditBoxLine} from "react-icons/ri"
 import { useContextAddress } from "../../hooks/useContextAddress"
 
-export const AddressCardInfo = ({addressDatas, notButtons}) => {
+export const AddressCardInfo = ({addressDatas, notButtons, idPerson}) => {
   const {handleDeleteAddress} = useContextAddress()
   const navigate = useNavigate()
 
@@ -20,7 +20,7 @@ export const AddressCardInfo = ({addressDatas, notButtons}) => {
       
       {!notButtons && 
       <div>
-        <ButtonWithIcon backgroundColor="#29CC97" onClick={event => navigate(`/address/update/${addressDatas.idPessoa}/${addressDatas.idEndereco}`)}>
+        <ButtonWithIcon backgroundColor="#29CC97" onClick={event => navigate(`/address/update/${idPerson}/${addressDatas.idEndereco}`)}>
           <RiEditBoxLine/>
         </ButtonWithIcon>
         <ButtonWithIcon backgroundColor="#F12B2C" onClick={(event) => handleDeleteAddress(addressDatas.idEndereco)}>

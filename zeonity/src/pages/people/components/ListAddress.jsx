@@ -12,7 +12,7 @@ export const ListAddress = ({listAddress, id}) => {
       <div>
         <AddressCardInfo notButtons addressDatas={{cep: "cep", logradouro: "logradouro", numero: "numero", cidade: "cidade", estado: "estado", pais: "pais", complemento: "complemento"}}/>
         {listAddress.length ? listAddress.map((address, i) => (
-          <AddressCardInfo addressDatas={address} key={i}/>
+          <AddressCardInfo addressDatas={address} idPerson={id} key={i}/>
         )) : <h2>Nenhum endereço cadastrado</h2>}
       </div>
        <Button width="200px" alignSelf="center" onClick={event => navigate(`/address/create/${id}`)}>Adicionar endereços</Button>
