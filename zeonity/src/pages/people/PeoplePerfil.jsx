@@ -6,7 +6,6 @@ import { Loading } from "../../components/Loading"
 import { useContextAddress } from "../../hooks/useContextAddress"
 import {useContextPeople} from "../../hooks/useContextPeople"
 import { HeaderPages } from "../../components/HeaderPages/styles"
-import { ContainerForFormAndLists } from "../../components/ContainerForFormAndLists/styles"
 import { ListAddress } from "./components/ListAddress"
 
 export const PeoplePerfil = () => {
@@ -36,18 +35,12 @@ export const PeoplePerfil = () => {
   }
 
   return (
-    <ContainerPagesWithSideBar>
+    <ContainerPagesWithSideBar >
       <HeaderPages>
         {personDatas && <h3>Usuário: {personDatas.nome}</h3>}
         <Button width="200px" onClick={event => navigate("/people")}>Voltar</Button>
       </HeaderPages>
-      
-      <ContainerForFormAndLists>
-        <ListAddress listAddress={listAddressOfPerson}/>
-
-        <Button width="200px" onClick={event => navigate(`/address/create/${id}`)}>Adicionar endereços</Button>
-      </ContainerForFormAndLists>
-      
+      <ListAddress listAddress={listAddressOfPerson} id={id}/>
     </ContainerPagesWithSideBar>
   )
 }

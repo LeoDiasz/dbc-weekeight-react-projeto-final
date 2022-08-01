@@ -11,5 +11,4 @@ const CreateUserAndSignupSchema = Yup.object().shape({
     .required('Necessário preencher')
 });
 
-
 export {CreateUserAndSignupSchema}

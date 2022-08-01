@@ -21,8 +21,12 @@ export const PersonCardInfo = ({person, notButtons}) => {
       
       {!notButtons && <div>
           <ButtonWithIcon width="80px" size="16px" onClick={event => navigate(`/people/perfil/${person.idPessoa}`)}>Detalhes</ButtonWithIcon>
-          <ButtonWithIcon backgroundColor="#29CC97" onClick={event => navigate(`/people/update/${person.idPessoa}`)}><RiEditBoxLine/></ButtonWithIcon>
-          <ButtonWithIcon backgroundColor="#F12B2C" onCLick={event => handleDeletePerson(person.idPessoa)}><RiDeleteBinLine/></ButtonWithIcon>
+          <ButtonWithIcon backgroundColor="#29CC97" onClick={event => navigate(`/people/update/${person.idPessoa}`)}>
+            <RiEditBoxLine/>
+          </ButtonWithIcon>
+          <ButtonWithIcon backgroundColor="#F12B2C" onClick={(event) => handleDeletePerson(person.idPessoa)}>
+            <RiDeleteBinLine/>
+          </ButtonWithIcon>
       </div>}
     </PersonContent>
   )

@@ -8,7 +8,7 @@ const FormStyle = styled(FormContent)`
   }
 `
 
-const ListPeopleContainer = styled(ContainerForFormAndLists)`
+const ListContainer = styled(ContainerForFormAndLists)`
 
   h3 {
     padding: 0 40px;
@@ -18,5 +18,14 @@ const ListPeopleContainer = styled(ContainerForFormAndLists)`
     font-weight: bold;
   }
 
+  h2 {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  
+
 `
-export {FormStyle, ListPeopleContainer}
+
+
+export {FormStyle, ListContainer}

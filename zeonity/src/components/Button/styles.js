@@ -5,11 +5,12 @@ const Button = styled.button`
   height : ${props => props.height && props.height};
   background-color: ${props => props.backgroundColor ? props.backgroundColor : props.theme.colors.primary};
   color: ${props => props.color ? props.color : "#fff"};
+  margin: ${props => props.margin && "0 40px"};
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  border-radius: 8px;
+  border-radius: ${props => props.radius ? props.radius : "8px"} ;
   border: none;
   cursor: pointer;
 `

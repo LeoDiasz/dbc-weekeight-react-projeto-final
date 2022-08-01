@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
 import {Toaster, toast} from "react-hot-toast"
 import {api} from "../services/api"
+import { Loading } from "../components/Loading";
 
 const AuthContext = createContext()
 
@@ -58,7 +59,7 @@ const AuthProvider = ({children}) => {
   }
   
   if (loading) {
-    return
+    <Loading/>
   }
 
   return (
