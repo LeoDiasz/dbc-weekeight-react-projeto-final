@@ -1,4 +1,5 @@
 import {Formik} from "formik"
+import {useEffect, useState} from "react"
 import {useParams} from "react-router-dom"
 import { maskCep } from "../../utils/masks"
 import { api } from "../../services/api"
@@ -9,8 +10,10 @@ import { Button } from "../../components/Button/styles"
 import { Label, Input, MaskInput, InputField } from "../../components/Input/styles"
 
 export const Address = () => {
-  const {id} = useParams()
-  const {handleCreateAddress} = useContextAddress()
+  const {id, idAddress} = useParams()
+  const [isUpdate, setIsUpdate] = useState(false)
+
+  const {handleCreateAddress , addressDatasUpdate, handleUpdateAddress, getAddressById} = useContextAddress()
 
   const searchDatasAddress = async (event, setFieldValue) => {
   
@@ -35,25 +38,51 @@ export const Address = () => {
     }
     
   }
+  
+  const setup = async () => {
+    if (id && idAddress) {
+      await getAddressById(idAddress)
+      setIsUpdate(true)
+    } 
+  } 
+
+  useEffect(() => { 
+      setup()
+  }, [])
+
+  useEffect(() => {
+
+  }, [addressDatasUpdate])
+
+  if(!addressDatasUpdate && isUpdate) {
+    console.log(addressDatasUpdate)
+    return
+  }
+
+  const addressDatas = addressDatasUpdate && addressDatasUpdate
+
+  const isUpdateAndHasDatasAddress = addressDatas && isUpdate
+
+ 
 
   return (
     <ContainerPagesWithSideBar>
-        <h1>Criar endereço</h1>
+        {isUpdate ? <h1>Atualizar endereço</h1> : <h1>Criar endereço</h1>}
         <Formik
         initialValues={{
           idPessoa: parseInt(id),
-          tipo: "",
-          logradouro: "",
-          numero: "",
-          complemento: "",
-          cep: "",
-          cidade: "",
-          estado: "",
-          pais: "",
+          tipo: isUpdateAndHasDatasAddress &&   "",
+          logradouro: isUpdateAndHasDatasAddress && "",
+          numero: isUpdateAndHasDatasAddress &&  "",
+          complemento: isUpdateAndHasDatasAddress &&  "",
+          cep: isUpdateAndHasDatasAddress && "",
+          cidade: isUpdateAndHasDatasAddress && "",
+          estado: isUpdateAndHasDatasAddress && "",
+          pais: isUpdateAndHasDatasAddress &&  "",
         }}
 
         onSubmit={async (values, resetForm) => {
-            await handleCreateAddress(values, id)
+            isUpdate ? await handleUpdateAddress(values, idAddress) : await handleCreateAddress(values, id)
             resetForm()
         }}>
           {({errors, values, handleChange, setFieldValue }) => (
@@ -105,7 +134,7 @@ export const Address = () => {
                 <Input name="tipo" id="tipo" placeholder="Digite Seu tipo" value={values.tipo} onChange={handleChange}/>
                 <div>{errors.tipo}</div>
               </div>
-              <Button type="submit">Criar Endereço</Button>
+              <Button type="submit">{isUpdate ? "Atualizar endereço" : "Criar Endereço"}</Button>
             </FormContent>
           )}
       </Formik>

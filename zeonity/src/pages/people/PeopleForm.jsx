@@ -14,7 +14,11 @@ export const PeopleForm = () => {
 
   const setup = async () => {
     if (id) {
-      await getPersonById(id)
+      try {
+        await getPersonById(id)
+      } catch(Error) {
+        console.log(Error)
+      }
       setIsUpdate(true)
     }
     setLoading(false)

@@ -7,6 +7,7 @@ const AddressContext = createContext()
 
 const AddressProvider = ({children}) => {
   const [listAddressOfPerson, setListAddressOfPerson] = useState() 
+  const [addressDatasUpdate, setAddressDatasUpdate] = useState()
   const navigate = useNavigate()
 
   const getAddressByIdPerson = async (idPerson) => {
@@ -21,6 +22,18 @@ const AddressProvider = ({children}) => {
     }
   }
   
+  const getAddressById = async (idAddress, setState = setAddressDatasUpdate) => {
+
+    try {
+      const {data: datasAddress} = await api.get(`endereco/${idAddress}`)
+  
+      setState(datasAddress)
+  
+    } catch(Error){
+      console.log(Error)
+    }
+  }
+
   const handleDeleteAddress = async (id) => {
     if(!id) {
       return
@@ -59,14 +72,14 @@ const AddressProvider = ({children}) => {
     
   }
 
-  const handleUpdateAddress = async (addressDatas) => {
+  const handleUpdateAddress = async (datasUpdates, idAddress) => {
 
     if (!addressDatas) {
       return
     }
 
     try {
-      await api.put(`/pessoa/${addressDatas}`, addressDatas)
+      await api.put(`/pessoa/${idAddress}`, datasUpdates)
       toast.success("Pessoa atualizada com sucesso")
   
     } catch(error) {
@@ -78,7 +91,15 @@ const AddressProvider = ({children}) => {
  
 
   return (
-    <AddressContext.Provider value={{getAddressByIdPerson, listAddressOfPerson, handleCreateAddress, handleDeleteAddress, handleUpdateAddress}}>
+    <AddressContext.Provider value={{
+      getAddressByIdPerson,
+      getAddressById,
+      addressDatasUpdate,
+      listAddressOfPerson, 
+      handleCreateAddress, 
+      handleDeleteAddress, 
+      handleUpdateAddress
+      }}>
       {children}
     </AddressContext.Provider>
   )

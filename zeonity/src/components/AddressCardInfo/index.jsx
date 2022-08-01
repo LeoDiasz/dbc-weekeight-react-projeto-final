@@ -20,7 +20,7 @@ export const AddressCardInfo = ({addressDatas, notButtons}) => {
       
       {!notButtons && 
       <div>
-        <ButtonWithIcon backgroundColor="#29CC97" onClick={event => navigate(`/address/update/${addressDatas.idEndereco}`)}>
+        <ButtonWithIcon backgroundColor="#29CC97" onClick={event => navigate(`/address/update/${addressDatas.idPessoa}/${addressDatas.idEndereco}`)}>
           <RiEditBoxLine/>
         </ButtonWithIcon>
         <ButtonWithIcon backgroundColor="#F12B2C" onClick={(event) => handleDeleteAddress(addressDatas.idEndereco)}>
