@@ -59,26 +59,20 @@ export const Address = () => {
     return
   }
 
-  const addressDatas = addressDatasUpdate && addressDatasUpdate
-
-  const isUpdateAndHasDatasAddress = addressDatas && isUpdate
-
- 
-
   return (
     <ContainerPagesWithSideBar>
         {isUpdate ? <h1>Atualizar endereço</h1> : <h1>Criar endereço</h1>}
         <Formik
         initialValues={{
           idPessoa: parseInt(id),
-          tipo: isUpdateAndHasDatasAddress &&   "",
-          logradouro: isUpdateAndHasDatasAddress && "",
-          numero: isUpdateAndHasDatasAddress &&  "",
-          complemento: isUpdateAndHasDatasAddress &&  "",
-          cep: isUpdateAndHasDatasAddress && "",
-          cidade: isUpdateAndHasDatasAddress && "",
-          estado: isUpdateAndHasDatasAddress && "",
-          pais: isUpdateAndHasDatasAddress &&  "",
+          tipo: "",
+          logradouro: "",
+          numero: "",
+          complemento:"",
+          cep:"",
+          cidade:"",
+          estado: "",
+          pais: "",
         }}
 
         onSubmit={async (values, resetForm) => {
