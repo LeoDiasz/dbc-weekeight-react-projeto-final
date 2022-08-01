@@ -9,6 +9,7 @@ import { People } from "./pages/people"
 import { PeopleForm } from "./pages/people/PeopleForm"
 import { PeoplePerfil } from "./pages/people/PeoplePerfil"
 import { NotFound } from "./pages/NotFound"
+import { Address } from "./pages/Address"
 
 const PrivateRoute = () => {
   const {token} = useContextAuth()
@@ -28,6 +29,7 @@ export const Routers = () => {
               <Route path="/" element={<Login/>}/>
               <Route path="/register" element={<CreateUser/>}/>
               <Route element={<PrivateRoute/>}>
+                  <Route path="/address/create/:id" element={<Address/>}/>
                   <Route path="/people" element={<People/>}/>
                   <Route path="/people/create" element={<PeopleForm/>}/>
                   <Route path="/people/update/:id" element={<PeopleForm/>}/>

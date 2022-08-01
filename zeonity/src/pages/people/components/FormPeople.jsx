@@ -11,7 +11,6 @@ export const FormPeople = ({isUpdate, personDatasUpdate}) => {
 
   useEffect(() => {
 
-
   }, [personDatasUpdate])
 
   if(!personDatasUpdate && isUpdate) {

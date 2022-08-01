@@ -4,6 +4,7 @@ import { FormPeople } from "./components/FormPeople"
 import { useContextPeople } from "../../hooks/useContextPeople"
 import { ContainerPagesWithSideBar } from "../../components/ContainerPagesWithSideBar"
 import { ContainerForFormAndLists } from "../../components/ContainerForFormAndLists/styles"
+import { Loading } from "../../components/Loading"
 
 export const PeopleForm = () => {
   const {getPersonById, personDatasUpdate}  = useContextPeople()
@@ -17,6 +18,7 @@ export const PeopleForm = () => {
       setIsUpdate(true)
     }
     setLoading(false)
+  
   }
 
   useEffect(() => {
@@ -25,7 +27,9 @@ export const PeopleForm = () => {
   }, [])
 
   if(loading) {
-    return
+    return (
+      <Loading/>
+    )
   }
   
   return (

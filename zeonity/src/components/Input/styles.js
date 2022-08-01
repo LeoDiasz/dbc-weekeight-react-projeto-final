@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import MaskedInput from "react-text-mask"
+import { Field } from "formik"
 
 const Input = styled.input`
   width: 100%;
@@ -33,4 +34,18 @@ const MaskInput = styled(MaskedInput)`
   }
 `
 
-export {Label, Input, MaskInput}
+const InputField = styled(Field)`
+  width: 100%;
+  min-height: 40px;
+  padding: 0 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-gray-dark);
+
+  &::placeholder {
+    color: var(--color-text-gray-dark);
+  }
+`
+
+export {Label, Input, MaskInput, InputField}
