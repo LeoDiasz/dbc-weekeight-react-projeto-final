@@ -7,13 +7,13 @@ import {PersonContent} from "./styles"
 import { ButtonWithIcon } from "../Button/styles"
 
 export const PersonCardInfo = ({person, notButtons}) => {
-  const navigate = useNavigate()
   moment.locale("pt-br")
   const dateBirth = moment(person.dataNascimento).format("LL")
+  const navigate = useNavigate()
   const {handleDeletePerson} = useContextPeople()
 
   return (
-    <PersonContent>
+    <PersonContent >
       <h4>{person.nome}</h4>
       <h4>{person.email}</h4>
       <h4>{person.cpf}</h4>
@@ -21,7 +21,7 @@ export const PersonCardInfo = ({person, notButtons}) => {
       
       {!notButtons && <div>
           <ButtonWithIcon backgroundColor="#29CC97" onClick={event => navigate(`/people/update/${person.idPessoa}`)}><RiEditBoxLine/></ButtonWithIcon>
-          <ButtonWithIcon backgroundColor="#F12B2C" onClick={event => handleDeletePerson(person.idPessoa)}><RiDeleteBinLine/></ButtonWithIcon>
+          <ButtonWithIcon backgroundColor="#F12B2C" onCLick ={event => handleDeletePerson(person.idPessoa)}><RiDeleteBinLine/></ButtonWithIcon>
       </div>}
     </PersonContent>
   )

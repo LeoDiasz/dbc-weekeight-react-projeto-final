@@ -1,7 +1,9 @@
 import {createContext, useState} from "react"
+import moment from "moment"
 import {toast} from "react-hot-toast"
 import {api} from "../services/api"
 import { maskOnlyNumbers } from "../utils/masks"
+import { formatDatePtBrForDefault, formatDateDefaultForPtBr } from "../utils/formatDatas"
 
 const PeopleContext = createContext()
 
@@ -23,11 +25,12 @@ const PeopleProvider = ({children}) => {
 
   }
 
-  const getPersonForId = async (id, setState = setPersonDatasUpdate) => {
+  const getPersonById = async (id, setState = setPersonDatasUpdate) => {
     
     try {
-      const {data: [personDatas]} = await api.get(`/pessoa/lista-completa?${id}`)
-
+      const {data: [personDatas]} = await api.get(`/pessoa/lista-completa?idPessoa=${id}`)
+      
+      personDatas.dataNascimento = formatDateDefaultForPtBr(personDatas.dataNascimento)
       const {cpf, email, dataNascimento, nome, idPessoa} = personDatas
       const personDatasFiltered = {cpf, email, dataNascimento, nome, idPessoa}
 
@@ -46,6 +49,7 @@ const PeopleProvider = ({children}) => {
     }
     
     personDatas.cpf = personDatas.cpf.replace(maskOnlyNumbers, "")
+    personDatas.dataNascimento = formatDatePtBrForDefault(personDatas.dataNascimento)
 
     const {email, dataNascimento, nome, cpf} = personDatas
     const personDatasFiltered = {email, dataNascimento, nome, cpf}
@@ -87,6 +91,7 @@ const PeopleProvider = ({children}) => {
     }
 
     personDatas.cpf = personDatas.cpf.replace(maskOnlyNumbers, "")
+    personDatas.dataNascimento = formatDatePtBrForDefault(personDatas.dataNascimento)
     
     const {idPessoa, dataNascimento, email, nome, cpf} = personDatas
     const personDatasForUpdate = {dataNascimento, email, nome, cpf} 
@@ -105,7 +110,7 @@ const PeopleProvider = ({children}) => {
   return (
     <PeopleContext.Provider value={{
       getPeople, 
-      getPersonForId, 
+      getPersonById, 
       handleCreatePerson, 
       handleDeletePerson, 
       handleUpdatePerson, 

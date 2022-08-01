@@ -1,10 +1,10 @@
 import { PersonCardInfo } from "../../../components/PersonCardInfo"
-import { ContainerForFormAndLists } from "../../../components/ContainerForFormAndLists/styles"
+import { ListPeopleContainer } from "../styles"
 
 export const ListPeople = ({listPeopleDatas}) => {
 
   return (
-    <ContainerForFormAndLists padding="40px 0" display="flex" direction="column" gap="20px">
+    <ListPeopleContainer padding="40px 0" display="flex" direction="column" gap="20px">
       <h3>Lista pessoas</h3>
 
       {listPeopleDatas ? 
@@ -16,6 +16,6 @@ export const ListPeople = ({listPeopleDatas}) => {
         </ul> 
 
       : <h2>Nenhuma pessoa cadastrada</h2>}
-    </ContainerForFormAndLists >
+    </ListPeopleContainer >
   )
 }

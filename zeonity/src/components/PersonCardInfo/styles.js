@@ -2,24 +2,25 @@ import styled from "styled-components"
 
 const PersonContent = styled.li`
   display: grid;
-  grid-template-columns: 1.8fr 300px repeat(3, 1fr);
-  justify-content: space-between;
-  gap: 40px;
+  grid-template-columns: 1.5fr 300px repeat(3, 1fr);
   align-items: center;
+  justify-content: space-between;
   height: 92px;
   width: 100%;
   padding: 0 40px;
+  gap: 40px;
   text-align: left;
-  border-bottom: 1px solid #DFE0EB;
-  cursor: pointer;
+  border-bottom: 1px solid var(--color-border);
   transition: 0.3s;
-  position: relative;
 
   &:hover {
-    background-color: #F7F8FC;
+    background-color: #f2f2f2;
   }
 
-
+  h4 {
+    font-weight: normal;
+    color: var(--color-text-gray-dark)
+  }
 
   > div {
     display: flex;

@@ -1,4 +1,5 @@
 const maskOnlyNumbers = /[^0-9]/gi
-const maskCpf = /[0-9] /gi
+const maskCpf = [/[0-9]/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, "-", /\d/, /\d/]
+const maskDate = [/[0-9]/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
 
-export {maskOnlyNumbers, maskCpf}
+export {maskOnlyNumbers, maskCpf, maskDate}

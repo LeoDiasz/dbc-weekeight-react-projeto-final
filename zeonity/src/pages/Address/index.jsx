@@ -70,9 +70,5 @@ export const Address = () => {
       </Formik> */}
  
     </ContainerPagesWithSideBar>
-    
-      
- 
-   
   )
 }

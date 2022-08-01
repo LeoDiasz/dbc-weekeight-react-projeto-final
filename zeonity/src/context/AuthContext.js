@@ -21,7 +21,7 @@ const AuthProvider = ({children}) => {
     const locationNow = window.location.href
 
     if(token && locationNow === "http://localhost:3000/"){
-      navigate("/home")
+      navigate("/people")
     }
     
   }, [])
@@ -36,7 +36,7 @@ const AuthProvider = ({children}) => {
       
       api.defaults.headers.common["authorization"] = token
 
-      navigate("/home")
+      navigate("/people")
       toast.success("Seja bem vindo!")
       
     } catch(Error) {

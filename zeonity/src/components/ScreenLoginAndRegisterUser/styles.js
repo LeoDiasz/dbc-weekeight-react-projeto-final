@@ -26,6 +26,7 @@ const DivBanner = styled.div`
   align-items: center;
   justify-content: center;
   background-color: var(--color-background-dark);
+  min-height: 100vh;
 
   img {
     width: 350px;

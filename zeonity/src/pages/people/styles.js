@@ -1,39 +1,22 @@
 import styled from "styled-components"
+import { FormContent } from "../../components/FormContent/styles"
+import {ContainerForFormAndLists} from "../../components/ContainerForFormAndLists/styles"
 
-
-const FormStyle = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 40px;
-  background-color: #fff;
-  border-radius: 8px;
-  border: 1px solid #DFE0EB;
-  gap: 25px;
-  
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+const FormStyle = styled(FormContent)`
+  input[id=cpf], input[id=dataNascimento] {
+    width: 200px;
   }
-  
-  *:not(button) {
-    width: 100%;
-  }
-
-  input {
-    padding: 0 20px;
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid #F0F1F7;
-    color: var(--color-text-gray-dark);
-  }
-  
-
-  input:last-child {
-    width: 15%;
-  }
- 
 `
-export {FormStyle}
+
+const ListPeopleContainer = styled(ContainerForFormAndLists)`
+
+  h3 {
+    padding: 0 40px;
+  }
+
+  ul > li:first-child  h4 {
+    font-weight: bold;
+  }
+
+`
+export {FormStyle, ListPeopleContainer}

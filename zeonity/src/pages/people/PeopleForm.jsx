@@ -3,27 +3,36 @@ import { useParams } from "react-router-dom"
 import { FormPeople } from "./components/FormPeople"
 import { useContextPeople } from "../../hooks/useContextPeople"
 import { ContainerPagesWithSideBar } from "../../components/ContainerPagesWithSideBar"
+import { ContainerForFormAndLists } from "../../components/ContainerForFormAndLists/styles"
 
 export const PeopleForm = () => {
-  const {getPersonForId, personDatasUpdate}  = useContextPeople()
+  const {getPersonById, personDatasUpdate}  = useContextPeople()
+  const [loading, setLoading] = useState(true)
   const [isUpdate, setIsUpdate] = useState(false) 
   const {id} = useParams()
 
   const setup = async () => {
     if (id) {
-      await getPersonForId()
+      await getPersonById(id)
       setIsUpdate(true)
     }
+    setLoading(false)
   }
 
   useEffect(() => {
     setup()
-      
+
   }, [])
+
+  if(loading) {
+    return
+  }
   
   return (
     <ContainerPagesWithSideBar>
-      <FormPeople personDatasUpdate={personDatasUpdate} isUpdate={isUpdate}/>
+      <ContainerForFormAndLists>
+        <FormPeople personDatasUpdate={personDatasUpdate} isUpdate={isUpdate}/>
+      </ContainerForFormAndLists>
     </ContainerPagesWithSideBar>
   )
 }

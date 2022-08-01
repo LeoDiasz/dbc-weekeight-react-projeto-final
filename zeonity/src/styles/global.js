@@ -10,6 +10,7 @@ const theme = {
     textGrayDark: "#9FA2B4",
     textLight: "#FCFDFE",
     border: "#DFE0EB",
+    black: "#252733"
   }
 }
 
@@ -25,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
     --color-text-gray: ${theme.colors.textGray};
     --color-text-gray-dark: ${theme.colors.textGrayDark};
     --color-text-light: ${theme.colors.textLight}
+    --color-text-black: ${theme.colors.black}
   }
 
   * {

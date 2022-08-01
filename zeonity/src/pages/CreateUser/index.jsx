@@ -2,9 +2,9 @@ import {Formik} from "formik"
 import {toast} from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {api} from "../../services/api"
+import { ScreenLoginAndRegisterUser } from "../../components/ScreenLoginAndRegisterUser";
 import { Button } from "../../components/Button/styles";
 import { Label, Input } from "../../components/Input/styles";
-import { ScreenLoginAndRegisterUser } from "../../components/ScreenLoginAndRegisterUser";
 import { FormContent } from "../../components/FormContent/styles";
 import { CreateUserAndSignupSchema } from "../../utils/validations";
 

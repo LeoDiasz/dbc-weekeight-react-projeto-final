@@ -11,8 +11,6 @@ export const SideBar = () => {
     <NavContent>
       <Logo isWithText/>
       <ListContent>
-        {/* <li><Link to="/address">Endereço</Link></li> */}
-        <li><Link to="/home">Home</Link></li> 
         <li><Link to="/people">Pessoas</Link></li>
       </ListContent>
       <Button width="200px" onClick={signOut}>Sair</Button>

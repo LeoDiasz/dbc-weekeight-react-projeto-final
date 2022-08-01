@@ -1,65 +1,72 @@
 import {useEffect} from "react"
-import {useFormik} from "formik"
-import {IMaskInput} from "react-imask"
+import {Formik} from "formik"
 import {useContextPeople} from "../../../hooks/useContextPeople"
+import { maskCpf, maskDate } from "../../../utils/masks"
 import { Button } from "../../../components/Button/styles"
 import { FormStyle } from "../styles"
+import { Label, Input, MaskInput } from "../../../components/Input/styles"
 
 export const FormPeople = ({isUpdate, personDatasUpdate}) => {
   const { handleUpdatePerson, handleCreatePerson} = useContextPeople()
-  const personDatas = personDatasUpdate && personDatasUpdate
-
-  const formik = useFormik(
-  {initialValues: {
-    nome: "", 
-    dataNascimento: "", 
-    cpf: "", 
-    email: "", 
-    idPessoa: ""
-    }, 
-  onSubmit: async (values) => {
-    isUpdate ? await handleUpdatePerson(values) : await handleCreatePerson(values)
-    formik.resetForm({values: { nome: "", dataNascimento: "", cpf: "", email: "", idPessoa: ""}})
-  }})
 
   useEffect(() => {
+
+
   }, [personDatasUpdate])
 
   if(!personDatasUpdate && isUpdate) {
     return
   }
 
-  if (isUpdate) {
-    const {idPessoa, email, nome, dataNascimento, cpf} = personDatas
-  }
+  const personDatas = personDatasUpdate && personDatasUpdate
+
+  const isUpdateAndHasDatasPerson = personDatas && isUpdate
 
   return (
-    <FormStyle onSubmit={formik.handleSubmit}>
-      <h2>{!isUpdate ? "Cadastrar pessoas" : "Atualizar"}</h2>
-      
-      <div>
-        <label htmlFor="nome">Nome</label>
-        <input name="nome" id="nome" placeholder="Digite o nome da pessoa" onChange={formik.handleChange} value={formik.values.nome}/>
-      </div>
+    <Formik 
+      initialValues={{
+      nome: isUpdateAndHasDatasPerson ? personDatas.nome : "", 
+      dataNascimento: isUpdateAndHasDatasPerson ? personDatas.dataNascimento : "", 
+      cpf: isUpdateAndHasDatasPerson ? personDatas.cpf : "", 
+      email: isUpdateAndHasDatasPerson ? personDatas.email : "", 
+      idPessoa: isUpdateAndHasDatasPerson ? personDatas.idPessoa : ""
+      }}
+      onSubmit={async (values, resetForm) => {
+        isUpdate ? await handleUpdatePerson(values) : await handleCreatePerson(values)
+        resetForm()
+      }}>
 
-      <div>
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="Digite o email" onChange={formik.handleChange} value={formik.values.email}/>
-      </div>
+      {({ errors, values, handleChange }) => (
+        <FormStyle>
+          <h2>{!isUpdate ? "Cadastrar pessoas" : "Atualizar"}</h2>
+          
+          <div>
+            <Label htmlFor="nome">Nome</Label>
+            <Input name="nome" id="nome" placeholder="Digite o nome da pessoa" onChange={handleChange} value={values.nome}/>
+            <div>{errors.nome}</div>
+          </div>
 
-      <div>
-        <label htmlFor="cpf">Cpf</label>
-        <IMaskInput mask="000.000.000-00" name="cpf" id="cpf" placeholder="Digite o cpf" onChange={formik.handleChange} value={formik.values.cpf}/>
-      </div>
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input type="email" name="email" id="email" placeholder="Digite o email" onChange={handleChange} value={values.email}/>
+            <div>{errors.email}</div>
+          </div>
 
-      <div>
-        <label htmlFor="data">Data nascimento</label>
-        <input type="text" name="dataNascimento" id="dataNascimento" onChange={formik.handleChange} value={formik.values.dataNascimento} />
-      </div>
+          <div>
+            <Label htmlFor="cpf">Cpf</Label>
+            <MaskInput name="cpf" id="cpf" mask={maskCpf} placeholder="Digite o cpf" onChange={handleChange} value={values.cpf}/>
+            <div>{errors.cpf}</div>
+          </div>
 
-      <Button width="50%" type="submit">{!isUpdate ? "Cadastrar" : "Atualizar"}</Button>
-     </FormStyle>
+          <div>
+            <Label htmlFor="data">Data nascimento</Label>
+            <MaskInput type="text" name="dataNascimento" id="dataNascimento" mask={maskDate} placeholder="Data nascimento" onChange={handleChange} value={values.dataNascimento} />
+            <div>{errors.dataNascimento}</div>
+          </div>
 
-   
+          <Button width="50%" type="submit">{!isUpdate ? "Cadastrar" : "Atualizar"}</Button>
+        </FormStyle>
+      )}
+    </Formik>
   )
 }
