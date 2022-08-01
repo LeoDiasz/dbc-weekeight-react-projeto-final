@@ -29,6 +29,7 @@ export const Routers = () => {
               <Route path="/" element={<Login/>}/>
               <Route path="/register" element={<CreateUser/>}/>
               <Route element={<PrivateRoute/>}>
+                  <Route path="/address/update/:id" element={<Address/>}/>
                   <Route path="/address/create/:id" element={<Address/>}/>
                   <Route path="/people" element={<People/>}/>
                   <Route path="/people/create" element={<PeopleForm/>}/>

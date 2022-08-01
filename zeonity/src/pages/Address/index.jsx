@@ -25,7 +25,6 @@ export const Address = () => {
     try {
       const {data: result} = await api.get(`https://viacep.com.br/ws/${newCep}/json/`)
       
-   
       setFieldValue("cidade", result.localidade)
       setFieldValue("estado", result.uf)
       setFieldValue("complemento", result.complemento)

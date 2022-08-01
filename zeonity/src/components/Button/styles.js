@@ -8,6 +8,7 @@ const Button = styled.button`
   margin: ${props => props.margin && "0 40px"};
   display: flex;
   align-items: center;
+  align-self: ${props => props.alignSelf && props.alignSelf};
   justify-content: center;
   min-height: 48px;
   border-radius: ${props => props.radius ? props.radius : "8px"} ;
