@@ -16,8 +16,8 @@ const Button = styled.button`
 
 const ButtonWithIcon = styled(Button)`
   border-radius: 15px;
-  width: 50px;
-  font-size: 20px;
+  width: ${props => props.width ? props.width : "50px"};
+  font-size: ${props => props.size ? props.size : "20px"};
 `
 
 export {ButtonWithIcon, Button} 

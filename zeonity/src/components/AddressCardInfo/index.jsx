@@ -2,6 +2,7 @@ import { ListAddressContent } from "./styles"
 import { ButtonWithIcon } from "../Button/styles"
 import {RiDeleteBinLine, RiEditBoxLine} from "react-icons/ri"
 import { useContextAddress } from "../../hooks/useContextAddress"
+
 export const AddressCardInfo = ({addressDatas}) => {
   const {handleDeleteAddress} = useContextAddress()
 
