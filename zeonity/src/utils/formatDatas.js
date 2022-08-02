@@ -28,6 +28,14 @@ const formatDateExtended = (date) => {
   return newDate
 }
 
+const formatCpfWithCaracteres = (data) => {
+  return data.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
+}
 
-export {formatDateDefaultForPtBr, formatDatePtBrForDefault, formatDateExtended, formatDataForOnlyNumbers}
+const formatCepWithCaracteres = (data) => {
+  return data.replace(/(\d{5})(\d{3})/, "$1-$2")
+}
+
+
+export {formatDateDefaultForPtBr, formatDatePtBrForDefault, formatDateExtended, formatDataForOnlyNumbers, formatCepWithCaracteres, formatCpfWithCaracteres}
 

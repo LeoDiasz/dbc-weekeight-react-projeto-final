@@ -5,6 +5,7 @@ import { ModalDelete } from "../ModalDelete"
 import { useContextAddress } from "../../hooks/useContextAddress"
 import { ListAddressContent } from "./styles"
 import { ButtonWithIcon } from "../Button/styles"
+import { formatCepWithCaracteres } from "../../utils/formatDatas"
 
 export const AddressCardInfo = ({addressDatas, notButtons, idPerson}) => {
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -21,7 +22,7 @@ export const AddressCardInfo = ({addressDatas, notButtons, idPerson}) => {
 
   return (
     <ListAddressContent>
-      <h4>{addressDatas.cep}</h4>
+      <h4>{formatCepWithCaracteres(addressDatas.cep)}</h4>
       <h4>{addressDatas.logradouro}</h4>
       <h4>{addressDatas.numero}</h4>
       <h4>{addressDatas.complemento ? addressDatas.complemento : "Sem complemento"}</h4>

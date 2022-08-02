@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {RiDeleteBinLine, RiEditBoxLine} from "react-icons/ri"
 import {ModalDelete} from "../../components/ModalDelete/index"
-import { formatDateExtended } from "../../utils/formatDatas"
+import { formatDateExtended, formatCpfWithCaracteres } from "../../utils/formatDatas"
 import { useContextPeople } from "../../hooks/useContextPeople"
 import {PersonContent} from "./styles"
 import { ButtonWithIcon } from "../Button/styles"
@@ -25,7 +25,7 @@ export const PersonCardInfo = ({person, notButtons}) => {
     <PersonContent>
       <h4>{person.nome}</h4>
       <h4>{person.email}</h4>
-      <h4>{person.cpf}</h4>
+      <h4>{formatCpfWithCaracteres(person.cpf)}</h4>
       <h4>{person.dataNascimento === "Data nascimento" ? "Data nascimento" : dateBirth}</h4>
       
       {!notButtons && 
