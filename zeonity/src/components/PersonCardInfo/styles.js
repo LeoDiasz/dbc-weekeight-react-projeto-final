@@ -28,6 +28,16 @@ const PersonContent = styled.li`
     align-items: center;
     justify-content: flex-end;
   }
+
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+  }
+
+  @media (max-width: 576px) {
+   
+  }
+
 `
 
 export {PersonContent}

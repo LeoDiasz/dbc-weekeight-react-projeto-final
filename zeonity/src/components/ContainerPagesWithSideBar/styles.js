@@ -5,6 +5,11 @@ const DivContainer = styled.div`
   grid-template-columns: 35vh 1fr;
   background-color: var(--color-background-light);
   min-height: 100vh;
+
+  @media (max-width: 1400px) {
+    grid-template-columns: 100%;
+  }
+
 `
 
 const baseStylesSection = css`

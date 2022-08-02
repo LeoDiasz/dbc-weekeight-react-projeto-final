@@ -9,6 +9,50 @@ const NavContent = styled.nav`
   padding: 40px 0;
   background-color: var(--color-background-dark);
 
+
+  @media (max-width: 1400px) {
+    flex-direction:  row;
+    padding: 20px 40px;
+    min-width: 100%;
+
+    ul {
+      flex-direction: row;
+      align-items: center;
+
+      li {
+        width: 30%;
+      }
+
+      a {
+        padding: 10px 0;
+      }
+
+      li:hover {
+        background-color: transparent;
+
+        a {
+          color: var(--color-primary);
+          text-decoration: underline;
+        }
+      }
+
+    }
+
+  }
+
+  @media (max-width: 576px) {
+
+    img {
+      width: 100px;
+    }
+
+    > button {
+      min-width: 80px;
+      padding: 10px 0px;
+      min-height: 20px;
+    }
+  }
+
 `
 
 const ListContent = styled.ul`

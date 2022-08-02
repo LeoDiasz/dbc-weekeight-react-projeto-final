@@ -103,6 +103,15 @@ const GlobalStyle = createGlobalStyle`
       gap: 30px;
     }
 
+
+    @media(max-width: 780px) {
+      width: 80%;
+
+      button {
+        width: 80px;
+      }
+    }
+
   }
 
 `

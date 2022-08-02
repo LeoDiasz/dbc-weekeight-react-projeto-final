@@ -14,6 +14,17 @@ const LoadingContent = styled.div`
   background-color: var(--color-background-light);
   border-radius: 8px;
   color: var(--color-text-gray-dark);
+
+  @media (max-width: 780px) {
+    width: 400px;
+  
+  }
+
+  @media (max-width: 576px) {
+    width: 300px;
+  
+  }
+
 `
 
 export {LoadingContent, LoadingContainer}
