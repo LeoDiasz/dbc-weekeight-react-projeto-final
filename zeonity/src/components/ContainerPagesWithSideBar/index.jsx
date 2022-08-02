@@ -1,16 +1,16 @@
 import { SideBar } from "../SideBar"
 import { DivContainer, SectionPagesWithSideBar, MainPageWithSideBar } from "./styles"
 
-export const ContainerPagesWithSideBar = ({children}, isMain) => {
+export const ContainerPagesWithSideBar = ({children, isMain, gap}) => {
   return (
     <DivContainer>
       <SideBar/>
       {isMain ? 
-        <MainPageWithSideBar>
+        <MainPageWithSideBar gap={gap && gap}>
           {children}
         </MainPageWithSideBar> 
       :
-        <SectionPagesWithSideBar>
+        <SectionPagesWithSideBar gap={gap && gap}>
           {children}
         </SectionPagesWithSideBar>
       }    

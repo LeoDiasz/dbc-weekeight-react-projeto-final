@@ -11,7 +11,6 @@ const CreateUserAndSignupSchema = Yup.object().shape({
     .required('Necessário preencher')
 });
 
-
 const PersonSchema = Yup.object().shape({
   nome: Yup.string()
     .min(3, 'Minimo 3 caracteres')
@@ -19,19 +18,20 @@ const PersonSchema = Yup.object().shape({
     .required('Necessário preencher'),
   email: Yup.string()
     .min(5, 'Minimo 5 caracteres')
-    .max(20, 'Maximo 20 caracteres!')
+    .max(40, 'Maximo 40 caracteres!')
+    .email("Email não é valido")
     .required('Necessário preencher'),
   dataNascimento: Yup.string()
   .min(10, 'Minimo 8 caracteres na data')
   .required('Necessário preencher'),
   cpf: Yup.string()
-    .min(11, 'Cpf tem que ter 11 digitos')
-    .required('Necessário preencher')
+    .min(2, "cpf tem que ter 11 digitos")
+    .required('Necessário preencher'),
 });
-
 
 const AddressSchema = Yup.object().shape({
   cep: Yup.string()
+    .min(9, "Cep tem que ter 8 digitos")
     .required('Necessário preencher'),
   logradouro: Yup.string()
     .required('Necessário preencher'),
@@ -42,7 +42,10 @@ const AddressSchema = Yup.object().shape({
   cidade: Yup.string()
   .required('Necessário preencher'),
   numero: Yup.string()
-  .required('Necessário preencher')
+  .required('Necessário preencher'),
+  tipo: Yup.string()
+  .required('Necessário preencher'),
+  
   
 });
 

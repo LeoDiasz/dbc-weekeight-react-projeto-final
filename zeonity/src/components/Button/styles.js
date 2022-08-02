@@ -13,7 +13,6 @@ const Button = styled.button`
   border-radius: ${props => props.radius ? props.radius : "8px"} ;
   min-height: 48px;
   border: none;
-  cursor: pointer;
 `
 
 const ButtonWithIcon = styled(Button)`

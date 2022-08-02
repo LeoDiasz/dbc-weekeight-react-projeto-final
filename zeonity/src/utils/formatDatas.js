@@ -1,5 +1,6 @@
 import moment from "moment"
 import "moment/locale/pt-br"
+import { maskOnlyNumbers } from "./masks"
 
 const formatDateDefaultForPtBr = (date) => {
   const dateFormated = moment(date, "YYYY-MM-DD").format("DD/MM/YYYY")
@@ -13,6 +14,13 @@ const formatDatePtBrForDefault = (date) => {
   return dateFormated
 }
 
+const formatDataForOnlyNumbers = (data) => {
+
+  const newData = data.replace(maskOnlyNumbers, "")
+
+  return newData
+}
+
 const formatDateExtended = (date) => {
   moment.locale("pt-br")
   const newDate = moment(date).format("LL")
@@ -21,5 +29,5 @@ const formatDateExtended = (date) => {
 }
 
 
-export {formatDateDefaultForPtBr, formatDatePtBrForDefault, formatDateExtended}
+export {formatDateDefaultForPtBr, formatDatePtBrForDefault, formatDateExtended, formatDataForOnlyNumbers}
 

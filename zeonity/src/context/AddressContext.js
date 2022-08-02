@@ -2,6 +2,7 @@ import {createContext, useState} from "react"
 import {useNavigate} from "react-router-dom"
 import {toast} from "react-hot-toast"
 import {api} from "../services/api"
+import { formatDataForOnlyNumbers } from "../utils/formatDatas"
 
 const AddressContext = createContext()
 
@@ -40,7 +41,7 @@ const AddressProvider = ({children}) => {
       return
     }
 
-    addressDatas.cep = addressDatas.cep.replace("-", "")
+    addressDatas.cep = formatDataForOnlyNumbers(addressDatas.cep)
     addressDatas.tipo = addressDatas.tipo.toUpperCase()
 
     try {
@@ -62,7 +63,7 @@ const AddressProvider = ({children}) => {
       return
     }
 
-    datasUpdates.cep = datasUpdates.cep.replace("-", "")
+    datasUpdates.cep = formatDataForOnlyNumbers(datasUpdates.cep)
     datasUpdates.tipo = datasUpdates.tipo.toUpperCase()
 
     try {

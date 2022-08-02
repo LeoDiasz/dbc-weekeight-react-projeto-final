@@ -2,8 +2,7 @@ import {createContext, useState} from "react"
 import { useNavigate } from "react-router-dom"
 import {toast} from "react-hot-toast"
 import {api} from "../services/api"
-import { maskOnlyNumbers } from "../utils/masks"
-import { formatDatePtBrForDefault, formatDateDefaultForPtBr } from "../utils/formatDatas"
+import { formatDatePtBrForDefault, formatDateDefaultForPtBr, formatDataForOnlyNumbers } from "../utils/formatDatas"
 
 const PeopleContext = createContext()
 
@@ -50,7 +49,7 @@ const PeopleProvider = ({children}) => {
       return
     }
     
-    personDatas.cpf = personDatas.cpf.replace(maskOnlyNumbers, "")
+    personDatas.cpf = formatDataForOnlyNumbers(personDatas.cpf)
     personDatas.dataNascimento = formatDatePtBrForDefault(personDatas.dataNascimento)
 
     const {email, dataNascimento, nome, cpf} = personDatas
@@ -93,7 +92,7 @@ const PeopleProvider = ({children}) => {
       return
     }
 
-    personDatas.cpf = personDatas.cpf.replace(maskOnlyNumbers, "")
+    personDatas.cpf = formatDataForOnlyNumbers(personDatas.cpf)
     personDatas.dataNascimento = formatDatePtBrForDefault(personDatas.dataNascimento)
     
     const {idPessoa, dataNascimento, email, nome, cpf} = personDatas

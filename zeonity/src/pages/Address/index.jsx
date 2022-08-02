@@ -1,25 +1,26 @@
 import {Formik} from "formik"
 import {useEffect, useState} from "react"
-import {useParams} from "react-router-dom"
+import {useParams, useNavigate} from "react-router-dom"
 import { maskCep } from "../../utils/masks"
+import { AddressSchema } from "../../utils/validations"
 import { api } from "../../services/api"
 import { useContextAddress } from "../../hooks/useContextAddress"
 import { ContainerPagesWithSideBar } from "../../components/ContainerPagesWithSideBar"
+import { HeaderPages } from "../../components/HeaderPages/styles"
 import { FormContent } from "../../components/FormContent/styles"
 import { Button } from "../../components/Button/styles"
-import { Label, Input, MaskInput, InputField, SelectInput, TextValidation } from "../../components/Input/styles"
+import { Label, MaskInput, InputField, SelectInput, TextValidation } from "../../components/Input/styles"
 import { ContainerForFormAndLists } from "../../components/ContainerForFormAndLists/styles"
-import { AddressSchema } from "../../utils/validations"
 
 export const Address = () => {
   const {id} = useParams()
   const {idAddress} = useParams()
+  const navigate = useNavigate()
   const [isUpdate, setIsUpdate] = useState(false)
   const [addressDatasUpdate, setAddressDatasUpdate] = useState()
-
   const {handleCreateAddress , handleUpdateAddress, getAddressById} = useContextAddress()
 
-  const searchDatasAddress = async (event, setFieldValue) => {
+  const searchDatasAddressViaCep = async (event, setFieldValue) => {
   
     const cep = event.target.value
     const newCep = cep.replace(/[^0-9]/gi, "");
@@ -69,13 +70,17 @@ export const Address = () => {
   const addressDatas = addressDatasUpdate && addressDatasUpdate
 
   return (
-    <ContainerPagesWithSideBar>
+    <ContainerPagesWithSideBar gap="30px">
+      <HeaderPages justifyContent="flex-end" >
+        <Button onClick={event => navigate(`/people/perfil/${id}`)}>Voltar</Button>
+      </HeaderPages>
+
       <ContainerForFormAndLists display="flex" direction="column" gap="30px">
         <h2>{isUpdate ? "Atualizar endereço" : "Criar endereço" }</h2>
         <Formik
           initialValues={{
             idPessoa: parseInt(id),
-            tipo: addressDatas && isUpdate ? addressDatas.tipo : "",
+            tipo: addressDatas && isUpdate ? addressDatas.tipo : "RESIDENCIAL",
             logradouro: addressDatas && isUpdate ? addressDatas.logradouro : "",
             numero: addressDatas && isUpdate ? addressDatas.numero : "",
             complemento: addressDatas && isUpdate ? addressDatas.complemento : "",
@@ -93,7 +98,7 @@ export const Address = () => {
               <FormContent>
                 <div>
                   <Label htmlFor="cep">Cep *</Label>
-                  <MaskInput mask={maskCep} name="cep" id="cep" value={values.cep} onChange={handleChange} onBlur={event => searchDatasAddress(event, setFieldValue)} placeholder="Digite seu cep"/> 
+                  <MaskInput mask={maskCep} name="cep" id="cep" value={values.cep} onChange={handleChange} onBlur={event => searchDatasAddressViaCep(event, setFieldValue)} placeholder="Digite seu cep"/> 
                   <TextValidation>{errors.cep}</TextValidation>
                 </div>
             
@@ -105,7 +110,7 @@ export const Address = () => {
               
                 <div>
                   <Label htmlFor="numero">Numero *</Label>
-                  <Input name="numero" id="numero" placeholder="Digite Seu numero" value={values.numero} onChange={handleChange}/>
+                  <InputField name="numero" id="numero" placeholder="Digite Seu numero"/>
                   <TextValidation>{errors.numero}</TextValidation>
                 </div>
           
@@ -129,18 +134,19 @@ export const Address = () => {
           
                 <div>
                   <Label htmlFor="pais">País *</Label>
-                  <Input name="pais" id="pais" placeholder="Digite Seu país" value={values.pais} onChange={handleChange}/>
+                  <InputField name="pais" id="pais" placeholder="Digite Seu país"/>
                   <TextValidation>{errors.pais}</TextValidation>
                 </div>
           
                 <div>
                   <Label htmlFor="tipo">Tipo *</Label>
-                  <InputField name="tipo" id="tipo" component="select">
-                      <option value="residencial">residencial</option>
-                      <option value="comercial">comercial</option>
-                  </InputField>
+                  <SelectInput name="tipo" id="tipo"  value={values.tipo} onChange={handleChange}>
+                    <option value="RESIDENCIAL">residencial</option>
+                    <option value="COMERCIAL">comercial</option>
+                  </SelectInput>
+                  <TextValidation>{errors.tipo}</TextValidation>
                 </div>
-                <Button type="submit">{isUpdate ? "Atualizar endereço" : "Criar Endereço"}</Button>
+                <Button type="submit" disabled={Object.values(errors).length > 0}>{isUpdate ? "Atualizar endereço" : "Criar Endereço"}</Button>
               </FormContent>
             )}
         </Formik>

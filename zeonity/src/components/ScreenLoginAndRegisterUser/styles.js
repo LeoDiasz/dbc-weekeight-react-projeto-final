@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, {css} from "styled-components"
 
 const DivContainer = styled.div `
   display: grid;
@@ -21,12 +21,16 @@ const DivContainer = styled.div `
 
 `
 
+const baseStylesContainers = css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+`
+
 const DivBanner = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${baseStylesContainers};
   background-color: var(--color-background-dark);
-  min-height: 100vh;
 
   img {
     width: 350px;
@@ -34,11 +38,8 @@ const DivBanner = styled.div`
 `
 
 const SectionPagesLoginAndCreateUser = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${baseStylesContainers};
   background-color: var(--color-background-light);
-  min-height: 100vh;
   text-align: center;
 
   a {
@@ -56,6 +57,5 @@ const SectionPagesLoginAndCreateUser = styled.section`
     }
   }
 `
-
 
 export {SectionPagesLoginAndCreateUser, DivContainer, DivBanner}

@@ -5,7 +5,7 @@ import {api} from "../../services/api"
 import { ScreenLoginAndRegisterUser } from "../../components/ScreenLoginAndRegisterUser";
 import { CreateUserAndSignupSchema } from "../../utils/validations";
 import { Button } from "../../components/Button/styles";
-import { Label, Input, TextValidation } from "../../components/Input/styles";
+import { Label, TextValidation, InputField } from "../../components/Input/styles";
 import { FormContent } from "../../components/FormContent/styles";
 
 
@@ -38,21 +38,21 @@ export const CreateUser = () => {
         onSubmit={values => {
           createAccount(values)
         }}>
-        {({ errors, values, handleChange }) => (
+        {({ errors}) => (
         <FormContent>
           <div>
             <Label htmlFor="login">Usuário</Label>
-            <Input name="login" id="login" placeholder="Nome usuário" onChange={handleChange} value={values.login}/>
+            <InputField name="login" id="login" placeholder="Nome usuário"/>
             <TextValidation>{errors.login}</TextValidation>
           </div>
 
           <div>
             <Label htmlFor="senha">Senha</Label>
-            <Input name="senha" id="senha" type="password" placeholder="Cadastrar senha" onChange={handleChange} value={values.senha}/>
+            <InputField name="senha" id="senha" type="password" placeholder="Cadastrar senha"/>
             <TextValidation>{errors.senha}</TextValidation>
           </div>
 
-          <Button width="100%">CRIAR</Button>
+          <Button width="100%" disabled={Object.values(errors).length > 0}>CRIAR</Button>
         </FormContent>
       )}
       </Formik>

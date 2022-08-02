@@ -18,7 +18,8 @@ export const ListAddress = ({listAddress, id}) => {
           cidade: "cidade", 
           estado: "estado", 
           pais: "pais", 
-          complemento: "complemento"
+          complemento: "complemento",
+          tipo: "tipo"
         }}/>
         {listAddress.length ? listAddress.map((address, i) => (
           <AddressCardInfo addressDatas={address} idPerson={id} key={i}/>

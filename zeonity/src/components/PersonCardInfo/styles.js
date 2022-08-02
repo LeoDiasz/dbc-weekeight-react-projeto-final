@@ -13,7 +13,7 @@ const PersonContent = styled.li`
   border-bottom: 1px solid var(--color-border);
   transition: 0.3s;
 
-  &:hover {
+  & + &:hover {
     background-color: #f2f2f2;
   }
 

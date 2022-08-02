@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, {css} from "styled-components"
 
 const DivContainer = styled.div`
   display: grid;
@@ -7,18 +7,19 @@ const DivContainer = styled.div`
   min-height: 100vh;
 `
 
-const SectionPagesWithSideBar = styled.section`
+const baseStylesSection = css`
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: ${props => props.gap ? props.gap : "100px"};
   padding: 40px;
 `
 
+const SectionPagesWithSideBar = styled.section`
+  ${baseStylesSection}
+`
+
 const MainPageWithSideBar = styled.main`
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
-  padding: 40px;
+  ${baseStylesSection}
 `
 
 export {DivContainer, SectionPagesWithSideBar, MainPageWithSideBar}

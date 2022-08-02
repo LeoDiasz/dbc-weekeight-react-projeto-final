@@ -3,7 +3,7 @@ import {Formik} from "formik"
 import {useContextPeople} from "../../../hooks/useContextPeople"
 import { maskCpf, maskDate } from "../../../utils/masks"
 import { Button } from "../../../components/Button/styles"
-import { Label, Input, MaskInput, TextValidation } from "../../../components/Input/styles"
+import { Label, MaskInput, TextValidation, InputField } from "../../../components/Input/styles"
 import { FormStyle } from "../styles"
 import { PersonSchema } from "../../../utils/validations"
 
@@ -43,19 +43,19 @@ export const FormPeople = ({isUpdate, personDatasUpdate}) => {
           
           <div>
             <Label htmlFor="nome">Nome *</Label>
-            <Input name="nome" id="nome" placeholder="Digite o nome da pessoa" onChange={handleChange} value={values.nome}/>
+            <InputField name="nome" id="nome" placeholder="Digite o nome da pessoa"/>
             <TextValidation>{errors.nome}</TextValidation>
           </div>
 
           <div>
             <Label htmlFor="email">Email *</Label>
-            <Input type="email" name="email" id="email" placeholder="Digite o email" onChange={handleChange} value={values.email}/>
+            <InputField type="email" name="email" id="email" placeholder="Digite o email"/>
             <TextValidation>{errors.email}</TextValidation>
           </div>
 
           <div>
             <Label htmlFor="cpf">Cpf *</Label>
-            <MaskInput name="cpf" id="cpf" mask={maskCpf} placeholder="Digite o cpf" onChange={handleChange} value={values.cpf}/>
+            <MaskInput name="cpf" id="cpf" mask={maskCpf} type="text" placeholder="Digite o cpf" onChange={handleChange} value={values.cpf}/>
             <TextValidation>{errors.cpf}</TextValidation>
           </div>
 
@@ -65,7 +65,7 @@ export const FormPeople = ({isUpdate, personDatasUpdate}) => {
             <TextValidation>{errors.dataNascimento}</TextValidation>
           </div>
 
-          <Button width="50%" type="submit">{!isUpdate ? "Cadastrar" : "Atualizar"}</Button>
+          <Button width="50%" type="submit" disabled={Object.values(errors).length > 0}>{!isUpdate ? "Cadastrar" : "Atualizar"}</Button>
         </FormStyle>
       )}
     </Formik>

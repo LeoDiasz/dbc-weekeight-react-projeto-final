@@ -1,11 +1,11 @@
-import {ContainerForFormAndLists} from "../ContainerForFormAndLists/styles"
+import { LoadingContent, LoadingContainer } from "./styles"
 
 export const Loading = () => {
   return (
-    <div>
-      <ContainerForFormAndLists display="flex" justifyContent="center">
+    <LoadingContainer className="react-modal-overlay">
+      <LoadingContent>
         <h2>Carregando....</h2>
-      </ContainerForFormAndLists>
-    </div>
+      </LoadingContent>
+    </LoadingContainer>
   )
 }
