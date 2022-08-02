@@ -25,13 +25,11 @@ const PersonSchema = Yup.object().shape({
   .min(10, 'Minimo 8 caracteres na data')
   .required('Necessário preencher'),
   cpf: Yup.string()
-    .min(2, "cpf tem que ter 11 digitos")
     .required('Necessário preencher'),
 });
 
 const AddressSchema = Yup.object().shape({
   cep: Yup.string()
-    .min(9, "Cep tem que ter 8 digitos")
     .required('Necessário preencher'),
   logradouro: Yup.string()
     .required('Necessário preencher'),
