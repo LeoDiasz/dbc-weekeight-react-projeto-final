@@ -23,7 +23,9 @@ export const People = () => {
 
 
   if (loading) {
-    <Loading/>
+    return (
+      <Loading/>
+    )
   }
 
   return (

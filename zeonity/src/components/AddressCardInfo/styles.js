@@ -9,10 +9,7 @@ export const ListAddressContent = styled(PersonContent)`
   height: 92px;
   width: 100%;
   padding: 0 40px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid var(--color-border);
   transition: 0.3s;
-
-  text-align: center;
-
 `

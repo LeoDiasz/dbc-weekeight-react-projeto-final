@@ -34,10 +34,6 @@ const PersonContent = styled.li`
     text-align: center;
   }
 
-  @media (max-width: 576px) {
-   
-  }
-
 `
 
 export {PersonContent}

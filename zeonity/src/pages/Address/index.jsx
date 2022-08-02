@@ -11,12 +11,14 @@ import { FormContent } from "../../components/FormContent/styles"
 import { Button } from "../../components/Button/styles"
 import { Label, MaskInput, InputField, SelectInput, TextValidation } from "../../components/Input/styles"
 import { ContainerForFormAndLists } from "../../components/ContainerForFormAndLists/styles"
+import { Loading } from "../../components/Loading"
 
 export const Address = () => {
   const {id} = useParams()
   const {idAddress} = useParams()
   const navigate = useNavigate()
   const [isUpdate, setIsUpdate] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [addressDatasUpdate, setAddressDatasUpdate] = useState()
   const {handleCreateAddress , handleUpdateAddress, getAddressById} = useContextAddress()
 
@@ -53,6 +55,7 @@ export const Address = () => {
         console.log(Error)
       }
     }
+    setLoading(false)
   } 
 
   useEffect(() => { 
@@ -65,6 +68,12 @@ export const Address = () => {
 
   if(!addressDatasUpdate && isUpdate) {
     return
+  }
+
+  if (loading) {
+    return (
+      <Loading/>
+    )
   }
 
   const addressDatas = addressDatasUpdate && addressDatasUpdate

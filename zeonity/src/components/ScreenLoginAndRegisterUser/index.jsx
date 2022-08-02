@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Logo } from "../Logo";
 import { ContainerForFormAndLists } from "../ContainerForFormAndLists/styles";
 import {SectionPagesLoginAndCreateUser, DivContainer, DivBanner} from "./styles"
+
 export const ScreenLoginAndRegisterUser = ({children, titleForm, isScreenLogin}) => {
 
   return (
