@@ -3,11 +3,12 @@ import {useEffect, useState} from "react"
 import {useParams} from "react-router-dom"
 import { maskCep } from "../../utils/masks"
 import { api } from "../../services/api"
-import { ContainerPagesWithSideBar } from "../../components/ContainerPagesWithSideBar"
 import { useContextAddress } from "../../hooks/useContextAddress"
+import { ContainerPagesWithSideBar } from "../../components/ContainerPagesWithSideBar"
 import { FormContent } from "../../components/FormContent/styles"
 import { Button } from "../../components/Button/styles"
 import { Label, Input, MaskInput, InputField } from "../../components/Input/styles"
+import { ContainerForFormAndLists } from "../../components/ContainerForFormAndLists/styles"
 
 export const Address = () => {
   const {id} = useParams()
@@ -42,6 +43,8 @@ export const Address = () => {
   
   const setup = async () => {
     if (id && idAddress) {
+      setIsUpdate(true)
+
       try {
         await getAddressById(idAddress)
       } catch(Error) {
@@ -64,83 +67,80 @@ export const Address = () => {
 
   const addressDatas = addressDatasUpdate && addressDatasUpdate
 
-  debugger
-  const isUpdateAndHasDatasAddress = addressDatas && isUpdate
-
   return (
     <ContainerPagesWithSideBar>
-        {isUpdate ? <h1>Atualizar endereço</h1> : <h1>Criar endereço</h1>}
+      <ContainerForFormAndLists display="flex" direction="column" gap="30px">
+        <h2>{isUpdate ? "Atualizar endereço" : "Criar endereço" }</h2>
         <Formik
-        initialValues={{
-          idPessoa: parseInt(id),
-          tipo: "",
-          logradouro: "",
-          numero: "",
-          complemento:"",
-          cep:"",
-          cidade:"",
-          estado: "",
-          pais: "",
-        }}
-
-        onSubmit={async (values, resetForm) => {
-            isUpdate ? await handleUpdateAddress(values, idAddress) : await handleCreateAddress(values, id)
-            resetForm()
-        }}>
-          {({errors, values, handleChange, setFieldValue }) => (
-            <FormContent>
-              <div>
-                <Label htmlFor="cep">Cep</Label>
-                <MaskInput mask={maskCep} name="cep" id="cep" value={values.cep} onChange={handleChange} onBlur={event => searchDatasAddress(event, setFieldValue)} placeholder="Digite seu cep"/> 
-                <div>{errors.cep}</div>
-              </div>
-          
-              <div>
-                <Label htmlFor="logradouro">Logradouro</Label>
-                <InputField name="logradouro" id="logradouro" placeholder="Digite Seu logradouro"/>
-                <div>{errors.logradouro}</div>
-              </div>
+          initialValues={{
+            idPessoa: parseInt(id),
+            tipo: addressDatas && isUpdate ? addressDatas.tipo : "",
+            logradouro: addressDatas && isUpdate ? addressDatas.logradouro : "",
+            numero: addressDatas && isUpdate ? addressDatas.numero : "",
+            complemento: addressDatas && isUpdate ? addressDatas.complemento : "",
+            cep: addressDatas && isUpdate ? addressDatas.cep : "",
+            cidade: addressDatas && isUpdate ? addressDatas.cidade : "",
+            estado: addressDatas && isUpdate ? addressDatas.estado : "",
+            pais: addressDatas && isUpdate ? addressDatas.pais : "",
+          }}
+          onSubmit={async (values, resetForm) => {
+              isUpdate ? await handleUpdateAddress(values, idAddress, id) : await handleCreateAddress(values, id)
+              resetForm()
+          }}>
+            {({errors, values, handleChange, setFieldValue }) => (
+              <FormContent>
+                <div>
+                  <Label htmlFor="cep">Cep</Label>
+                  <MaskInput mask={maskCep} name="cep" id="cep" value={values.cep} onChange={handleChange} onBlur={event => searchDatasAddress(event, setFieldValue)} placeholder="Digite seu cep"/> 
+                  <div>{errors.cep}</div>
+                </div>
             
-              <div>
-                <Label htmlFor="numero">Numero</Label>
-                <Input name="numero" id="numero" placeholder="Digite Seu numero" type="number" value={values.numero} onChange={handleChange}/>
-                <div>{errors.numero}</div>
-              </div>
-         
-              <div>
-                <Label htmlFor="complemento">Complemento</Label>
-                <InputField name="complemento" id="complemento" placeholder="Digite Seu complemento"/>
-                <div>{errors.complemento}</div>
-              </div>
-        
-              <div>
-                <Label htmlFor="cidade">Cidade</Label>
-                <InputField name="cidade" placeholder="Digite Seu cidade"/>
-                <div>{errors.cidade}</div>
-              </div>
-         
-              <div>
-                <Label htmlFor="estado">Estado</Label>
-                <InputField name="estado" placeholder="Digite Seu estado"/>
-                <div>{errors.estado}</div>
-              </div>
-         
-              <div>
-                <Label htmlFor="pais">Pais</Label>
-                <Input name="pais" id="pais" placeholder="Digite Seu pais" value={values.pais} onChange={handleChange}/>
-                <div>{errors.pais}</div>
-              </div>
-         
-              <div>
-                <Label htmlFor="tipo">Tipo</Label>
-                <Input name="tipo" id="tipo" placeholder="Digite Seu tipo" value={values.tipo} onChange={handleChange}/>
-                <div>{errors.tipo}</div>
-              </div>
-              <Button type="submit">{isUpdate ? "Atualizar endereço" : "Criar Endereço"}</Button>
-            </FormContent>
-          )}
-      </Formik>
- 
+                <div>
+                  <Label htmlFor="logradouro">Logradouro</Label>
+                  <InputField name="logradouro" id="logradouro" placeholder="Digite Seu logradouro"/>
+                  <div>{errors.logradouro}</div>
+                </div>
+              
+                <div>
+                  <Label htmlFor="numero">Numero</Label>
+                  <Input name="numero" id="numero" placeholder="Digite Seu numero" type="number" value={values.numero} onChange={handleChange}/>
+                  <div>{errors.numero}</div>
+                </div>
+          
+                <div>
+                  <Label htmlFor="complemento">Complemento</Label>
+                  <InputField name="complemento" id="complemento" placeholder="Digite Seu complemento"/>
+                  <div>{errors.complemento}</div>
+                </div>
+          
+                <div>
+                  <Label htmlFor="cidade">Cidade</Label>
+                  <InputField name="cidade" placeholder="Digite Seu cidade"/>
+                  <div>{errors.cidade}</div>
+                </div>
+          
+                <div>
+                  <Label htmlFor="estado">Estado</Label>
+                  <InputField name="estado" placeholder="Digite Seu estado"/>
+                  <div>{errors.estado}</div>
+                </div>
+          
+                <div>
+                  <Label htmlFor="pais">Pais</Label>
+                  <Input name="pais" id="pais" placeholder="Digite Seu pais" value={values.pais} onChange={handleChange}/>
+                  <div>{errors.pais}</div>
+                </div>
+          
+                <div>
+                  <Label htmlFor="tipo">Tipo</Label>
+                  <Input name="tipo" id="tipo" placeholder="Digite Seu tipo" value={values.tipo} onChange={handleChange}/>
+                  <div>{errors.tipo}</div>
+                </div>
+                <Button width="200px" type="submit">{isUpdate ? "Atualizar endereço" : "Criar Endereço"}</Button>
+              </FormContent>
+            )}
+        </Formik>
+      </ContainerForFormAndLists>
     </ContainerPagesWithSideBar>
   )
 }

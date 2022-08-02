@@ -1,8 +1,8 @@
 import {useNavigate} from "react-router-dom"
-import { ListAddressContent } from "./styles"
-import { ButtonWithIcon } from "../Button/styles"
 import {RiDeleteBinLine, RiEditBoxLine} from "react-icons/ri"
 import { useContextAddress } from "../../hooks/useContextAddress"
+import { ListAddressContent } from "./styles"
+import { ButtonWithIcon } from "../Button/styles"
 
 export const AddressCardInfo = ({addressDatas, notButtons, idPerson}) => {
   const {handleDeleteAddress} = useContextAddress()
@@ -23,7 +23,7 @@ export const AddressCardInfo = ({addressDatas, notButtons, idPerson}) => {
         <ButtonWithIcon backgroundColor="#29CC97" onClick={event => navigate(`/address/update/${idPerson}/${addressDatas.idEndereco}`)}>
           <RiEditBoxLine/>
         </ButtonWithIcon>
-        <ButtonWithIcon backgroundColor="#F12B2C" onClick={(event) => handleDeleteAddress(addressDatas.idEndereco)}>
+        <ButtonWithIcon backgroundColor="#F12B2C" onClick={(event) => handleDeleteAddress(addressDatas.idEndereco, idPerson)}>
           <RiDeleteBinLine/>
         </ButtonWithIcon>
       </div>}

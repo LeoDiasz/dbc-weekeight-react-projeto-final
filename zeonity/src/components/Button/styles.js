@@ -1,23 +1,24 @@
 import styled from "styled-components"
 
 const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: ${props => props.alignSelf && props.alignSelf};
+  margin: ${props => props.margin && "0 40px"};
   width: ${props => props.width ? props.width : "100%"};
   height : ${props => props.height && props.height};
   background-color: ${props => props.backgroundColor ? props.backgroundColor : props.theme.colors.primary};
   color: ${props => props.color ? props.color : "#fff"};
-  margin: ${props => props.margin && "0 40px"};
-  display: flex;
-  align-items: center;
-  align-self: ${props => props.alignSelf && props.alignSelf};
-  justify-content: center;
-  min-height: 48px;
   border-radius: ${props => props.radius ? props.radius : "8px"} ;
+  min-height: 48px;
   border: none;
   cursor: pointer;
 `
 
 const ButtonWithIcon = styled(Button)`
   border-radius: 15px;
+  min-height: 30px;
   width: ${props => props.width ? props.width : "50px"};
   font-size: ${props => props.size ? props.size : "20px"};
 `

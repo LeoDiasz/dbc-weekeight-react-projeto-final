@@ -10,12 +10,12 @@ const AddressProvider = ({children}) => {
   const [addressDatasUpdate, setAddressDatasUpdate] = useState()
   const navigate = useNavigate()
 
-  const getAddressByIdPerson = async (idPerson) => {
+  const getAddressByIdPerson = async (idPerson, setListAddress = setListAddressOfPerson) => {
 
     try {
       const {data: listAddress} = await api.get(`endereco/retorna-por-id-pessoa?idPessoa=${idPerson}`)
   
-      setListAddressOfPerson(listAddress)
+      setListAddress(listAddress)
   
     } catch(Error){
       console.log(Error)
@@ -34,22 +34,6 @@ const AddressProvider = ({children}) => {
     }
   }
 
-  const handleDeleteAddress = async (id) => {
-    if(!id) {
-      return
-    }
-
-    try {
-      
-      await api.delete(`/endereco/${id}`)
-
-      toast.success("endereço excluido com sucesso.")
-    
-    } catch {
-      toast.error("Não foi possivel deletar")
-    }
-  }
-
   const handleCreateAddress = async (addressDatas, idPerson) => {
 
     if (!addressDatas) {
@@ -62,8 +46,8 @@ const AddressProvider = ({children}) => {
     try {
       await api.post(`/endereco/{idPessoa}?idPessoa=${idPerson}`, addressDatas)
       
-      toast.success("Endereço cadastrado com sucesso")
       navigate(`/people/perfil/${idPerson}`)
+      toast.success("Endereço cadastrado com sucesso")
 
     } catch(Error) {
       toast.error("Não foi possivel cadastrar o endereço")
@@ -72,23 +56,45 @@ const AddressProvider = ({children}) => {
     
   }
 
-  const handleUpdateAddress = async (datasUpdates, idAddress) => {
+  const handleUpdateAddress = async (datasUpdates, idAddress, idPerson) => {
 
-    if (!addressDatas) {
+    if (!datasUpdates) {
       return
     }
 
+    datasUpdates.cep = datasUpdates.cep.replace("-", "")
+    datasUpdates.tipo = datasUpdates.tipo.toUpperCase()
+
     try {
-      await api.put(`/pessoa/${idAddress}`, datasUpdates)
-      toast.success("Pessoa atualizada com sucesso")
-  
+      await api.put(`/endereco/${idAddress}`, datasUpdates)
+
+      navigate(`/people/perfil/${idPerson}`)
+      toast.success("Endereço atualizado com sucesso!")
+      
     } catch(error) {
-      toast.error("Erro ao atualizar")
+      toast.error("Erro ao atualizar endereço.")
 
     }
   }
 
- 
+  const handleDeleteAddress = async (idAddress, idPerson) => {
+    if(!idAddress) {
+      return
+    }
+
+    try {
+      
+      await api.delete(`/endereco/${idAddress}`)
+      toast.success("Endereço excluido com sucesso.")
+
+      if (idPerson) {
+        getAddressByIdPerson(idPerson)
+      }
+    
+    } catch {
+      toast.error("Não foi possivel deletar")
+    }
+  }
 
   return (
     <AddressContext.Provider value={{

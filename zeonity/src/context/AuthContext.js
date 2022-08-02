@@ -13,6 +13,7 @@ const AuthProvider = ({children}) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token")
+
     if (token) {
       setToken(token)
       api.defaults.headers.common["authorization"] = token
@@ -51,6 +52,7 @@ const AuthProvider = ({children}) => {
     if (token) {
       localStorage.removeItem("token")
       setToken()
+      
       api.defaults.headers.common["authorization"] = undefined
       toast("Até logo!")
       navigate("/")

@@ -1,5 +1,5 @@
 import {createContext, useState} from "react"
-import moment from "moment"
+import { useNavigate } from "react-router-dom"
 import {toast} from "react-hot-toast"
 import {api} from "../services/api"
 import { maskOnlyNumbers } from "../utils/masks"
@@ -10,6 +10,7 @@ const PeopleContext = createContext()
 const PeopleProvider = ({children}) => {
   const [listPeople, setListPeople] = useState()
   const [personDatasUpdate, setPersonDatasUpdate] = useState()
+  const navigate = useNavigate()
 
   const getPeople = async(setState = setListPeople) => {
 
@@ -31,6 +32,7 @@ const PeopleProvider = ({children}) => {
       const {data: [personDatas]} = await api.get(`/pessoa/lista-completa?idPessoa=${id}`)
       
       personDatas.dataNascimento = formatDateDefaultForPtBr(personDatas.dataNascimento)
+
       const {cpf, email, dataNascimento, nome, idPessoa} = personDatas
       const personDatasFiltered = {cpf, email, dataNascimento, nome, idPessoa}
 
@@ -57,8 +59,9 @@ const PeopleProvider = ({children}) => {
     try {
       await api.post("/pessoa", personDatasFiltered)
       
-      toast.success("Pessoa cadastrada com sucesso")
       getPeople()
+      navigate("/people")
+      toast.success("Pessoa cadastrada com sucesso")
 
     } catch(Error) {
       toast.error("Não foi possivel cadastrar o usuário")
@@ -75,8 +78,8 @@ const PeopleProvider = ({children}) => {
       
       await api.delete(`/pessoa/${id}`)
 
-      toast.success("Pessoa deletada com sucesso.")
       getPeople()
+      toast.success("Pessoa deletada com sucesso.")
 
     } catch {
       toast.error("Não foi possivel deletar")
@@ -98,6 +101,8 @@ const PeopleProvider = ({children}) => {
 
     try {
       await api.put(`/pessoa/${idPessoa}`, personDatasForUpdate)
+      
+      navigate("/people")
       toast.success("Pessoa atualizada com sucesso")
   
     } catch(error) {
