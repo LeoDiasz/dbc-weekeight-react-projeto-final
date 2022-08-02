@@ -10,7 +10,8 @@ const theme = {
     textGrayDark: "#9FA2B4",
     textLight: "#FCFDFE",
     border: "#DFE0EB",
-    black: "#252733"
+    black: "#252733",
+    error: "#F12B2C",
   }
 }
 
@@ -25,8 +26,9 @@ const GlobalStyle = createGlobalStyle`
     --color-border: ${theme.colors.border};
     --color-text-gray: ${theme.colors.textGray};
     --color-text-gray-dark: ${theme.colors.textGrayDark};
-    --color-text-light: ${theme.colors.textLight}
-    --color-text-black: ${theme.colors.black}
+    --color-text-light: ${theme.colors.textLight};
+    --color-text-black: ${theme.colors.black};
+    --color-text-error: ${theme.colors.error};
   }
 
   * {
@@ -61,7 +63,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   [disabled] {
-    opacity: 0.6;
+    opacity: 0.9;
     cursor: not-allowed;
 
   }

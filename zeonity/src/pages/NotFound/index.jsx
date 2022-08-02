@@ -3,6 +3,7 @@ import {useContextAuth} from "../../hooks/useContextAuth"
 import { ContainerForFormAndLists } from "../../components/ContainerForFormAndLists/styles"
 import { Button } from "../../components/Button/styles"
 import { DivBanner } from "../../components/ScreenLoginAndRegisterUser/styles"
+import { Logo } from "../../components/Logo"
 
 export const NotFound = () => {
   const navigate = useNavigate()
@@ -12,7 +13,7 @@ export const NotFound = () => {
     <DivBanner>
       <ContainerForFormAndLists display="flex" direction="column" width="400px" alignItems="center" gap="50px">
         <h1>Essa pagina não existe</h1>
-        <Button width="200px" onClick={event => token ? navigate("/people" ) : navigate("/")}>Voltar</Button>
+        <Button onClick={event => token ? navigate("/people" ) : navigate("/")}>Voltar</Button>
       </ContainerForFormAndLists>
     </DivBanner>
   )

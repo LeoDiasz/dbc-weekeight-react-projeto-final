@@ -1,4 +1,5 @@
 import moment from "moment"
+import "moment/locale/pt-br"
 
 const formatDateDefaultForPtBr = (date) => {
   const dateFormated = moment(date, "YYYY-MM-DD").format("DD/MM/YYYY")
@@ -12,4 +13,13 @@ const formatDatePtBrForDefault = (date) => {
   return dateFormated
 }
 
-export {formatDateDefaultForPtBr, formatDatePtBrForDefault}
+const formatDateExtended = (date) => {
+  moment.locale("pt-br")
+  const newDate = moment(date).format("LL")
+
+  return newDate
+}
+
+
+export {formatDateDefaultForPtBr, formatDatePtBrForDefault, formatDateExtended}
+

@@ -13,10 +13,6 @@ const FormContent = styled(Form)`
     text-align: left;
   }
 
-  div > div {
-    margin-top: 10px;
-  }
-
   button {
     align-self: center;
   }

@@ -1,35 +1,35 @@
 import {Formik} from "formik"
 import {useContextAuth} from "../../hooks/useContextAuth"
 import { ScreenLoginAndRegisterUser } from "../../components/ScreenLoginAndRegisterUser";
-import { Button } from "../../components/Button/styles";
 import { CreateUserAndSignupSchema } from "../../utils/validations";
-import { Input, Label } from "../../components/Input/styles";
+import { Button } from "../../components/Button/styles";
+import { Input, Label, TextValidation } from "../../components/Input/styles";
 import { FormContent } from "../../components/FormContent/styles";
 
 export const Login = () => {
   const {signIn} = useContextAuth()
 
   return (
-    <ScreenLoginAndRegisterUser titleForm={"Entre em sua conta"}isScreenLogin>
+    <ScreenLoginAndRegisterUser titleForm={"Entre em sua conta"} isScreenLogin>
       <Formik 
         initialValues={{login: '', senha: ''}} 
         validationSchema={CreateUserAndSignupSchema} 
-        onSubmit={values => {signIn(values)}}>
+        onSubmit={values => {signIn(values)}}>    
         {({ errors, values, handleChange }) => (
           <FormContent>
             <div>
-              <Label htmlFor="login">Nome</Label>
+              <Label htmlFor="login">Usuário</Label>
               <Input name="login" id="login" placeholder="Digite seu login" onChange={handleChange} value={values.login}/>
-              <div>{errors.login}</div>
+              <TextValidation>{errors.login}</TextValidation>
             </div>
 
             <div>
               <Label htmlFor="senha">Senha</Label>
               <Input name="senha" id="senha" type="password" placeholder="Digite sua senha" onChange={handleChange} value={values.senha}/>
-              <div>{errors.senha}</div>
+              <TextValidation>{errors.senha}</TextValidation>
             </div>
 
-            <Button>ENTRAR</Button>
+            <Button width="100%">ENTRAR</Button>
           </FormContent>
         )}
       </Formik>

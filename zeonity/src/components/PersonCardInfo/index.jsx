@@ -1,14 +1,13 @@
 import moment from "moment"
-import "moment/locale/pt-br"
 import { useNavigate } from "react-router-dom"
 import {RiDeleteBinLine, RiEditBoxLine} from "react-icons/ri"
+import { formatDateExtended } from "../../utils/formatDatas"
 import { useContextPeople } from "../../hooks/useContextPeople"
 import {PersonContent} from "./styles"
 import { ButtonWithIcon } from "../Button/styles"
-
 export const PersonCardInfo = ({person, notButtons}) => {
-  moment.locale("pt-br")
-  const dateBirth = moment(person.dataNascimento).format("LL")
+  
+  const dateBirth = formatDateExtended(person.dataNascimento)
   const navigate = useNavigate()
   const {handleDeletePerson} = useContextPeople()
 

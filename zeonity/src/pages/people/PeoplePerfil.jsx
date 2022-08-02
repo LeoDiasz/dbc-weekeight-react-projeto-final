@@ -38,7 +38,7 @@ export const PeoplePerfil = () => {
     <ContainerPagesWithSideBar >
       <HeaderPages>
         {personDatas && <h3>Usuário: {personDatas.nome}</h3>}
-        <Button width="200px" onClick={event => navigate("/people")}>Voltar</Button>
+        <Button onClick={event => navigate("/people")}>Voltar</Button>
       </HeaderPages>
       <ListAddress listAddress={listAddressOfPerson} id={id}/>
     </ContainerPagesWithSideBar>

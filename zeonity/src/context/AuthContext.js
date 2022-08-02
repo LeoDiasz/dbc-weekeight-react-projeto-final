@@ -42,7 +42,7 @@ const AuthProvider = ({children}) => {
       toast.success("Seja bem vindo!")
       
     } catch(Error) {
-      toast.error("Erro de login. Email ou senha invalido")
+      toast.error("Erro de login. Email ou senha invalido.")
     }
 
   }

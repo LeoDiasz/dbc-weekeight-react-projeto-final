@@ -1,8 +1,8 @@
-import styled from "styled-components"
+import styled, {css} from "styled-components"
 import MaskedInput from "react-text-mask"
 import { Field } from "formik"
 
-const Input = styled.input`
+const baseStyleInputs = css`
   width: 100%;
   min-height: 40px;
   padding: 0 20px;
@@ -14,38 +14,32 @@ const Input = styled.input`
   &::placeholder {
     color: var(--color-text-gray-dark);
   }
+
+`
+
+const Input = styled.input`
+  ${baseStyleInputs}
+`
+
+const MaskInput = styled(MaskedInput)`
+  ${baseStyleInputs}
+`
+
+const InputField = styled(Field)`
+  ${baseStyleInputs}
+`
+
+const SelectInput = styled.select`
+  ${baseStyleInputs}
 `
 
 const Label = styled.label`
   color: var(--color-text-gray-dark);
 `
 
-const MaskInput = styled(MaskedInput)`
-  width: 100%;
-  min-height: 40px;
-  padding: 0 20px;
-  border-radius: 8px;
+const TextValidation = styled.span`
   margin-top: 10px;
-  border: 1px solid var(--color-border);
-  color: var(--color-text-gray-dark);
-
-  &::placeholder {
-    color: var(--color-text-gray-dark);
-  }
+  color: var(--color-text-error);
 `
 
-const InputField = styled(Field)`
-  width: 100%;
-  min-height: 40px;
-  padding: 0 20px;
-  border-radius: 8px;
-  margin-top: 10px;
-  border: 1px solid var(--color-border);
-  color: var(--color-text-gray-dark);
-
-  &::placeholder {
-    color: var(--color-text-gray-dark);
-  }
-`
-
-export {Label, Input, MaskInput, InputField}
+export {Label, Input, MaskInput, InputField, TextValidation, SelectInput}

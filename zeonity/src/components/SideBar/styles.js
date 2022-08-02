@@ -27,6 +27,7 @@ const ListContent = styled.ul`
       padding: 30px 0;
       width: 100%;
       color: var(--color-text-gray);
+      font-weight: bold;
     }
 
     li:hover {

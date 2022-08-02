@@ -13,7 +13,7 @@ export const AddressCardInfo = ({addressDatas, notButtons, idPerson}) => {
       <h4>{addressDatas.cep}</h4>
       <h4>{addressDatas.logradouro}</h4>
       <h4>{addressDatas.numero}</h4>
-      <h4>{addressDatas.complemento}</h4>
+      <h4>{addressDatas.complemento ? addressDatas.complemento : "Sem complemento"}</h4>
       <h4>{addressDatas.cidade}</h4>
       <h4>{addressDatas.estado}</h4>
       <h4>{addressDatas.pais}</h4>

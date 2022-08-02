@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import {Logo} from "../Logo"
 import {useContextAuth} from "../../hooks/useContextAuth"
+import {Logo} from "../Logo"
 import { Button } from "../Button/styles"
 import {NavContent, ListContent} from "./styles"
 

@@ -68,8 +68,8 @@ const AddressProvider = ({children}) => {
     try {
       await api.put(`/endereco/${idAddress}`, datasUpdates)
 
-      navigate(`/people/perfil/${idPerson}`)
       toast.success("Endereço atualizado com sucesso!")
+      navigate(`/people/perfil/${idPerson}`)
       
     } catch(error) {
       toast.error("Erro ao atualizar endereço.")

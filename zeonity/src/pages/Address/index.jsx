@@ -7,20 +7,21 @@ import { useContextAddress } from "../../hooks/useContextAddress"
 import { ContainerPagesWithSideBar } from "../../components/ContainerPagesWithSideBar"
 import { FormContent } from "../../components/FormContent/styles"
 import { Button } from "../../components/Button/styles"
-import { Label, Input, MaskInput, InputField } from "../../components/Input/styles"
+import { Label, Input, MaskInput, InputField, SelectInput, TextValidation } from "../../components/Input/styles"
 import { ContainerForFormAndLists } from "../../components/ContainerForFormAndLists/styles"
+import { AddressSchema } from "../../utils/validations"
 
 export const Address = () => {
   const {id} = useParams()
   const {idAddress} = useParams()
   const [isUpdate, setIsUpdate] = useState(false)
+  const [addressDatasUpdate, setAddressDatasUpdate] = useState()
 
-  const {handleCreateAddress , addressDatasUpdate, handleUpdateAddress, getAddressById} = useContextAddress()
+  const {handleCreateAddress , handleUpdateAddress, getAddressById} = useContextAddress()
 
   const searchDatasAddress = async (event, setFieldValue) => {
   
     const cep = event.target.value
-  
     const newCep = cep.replace(/[^0-9]/gi, "");
   
     if(newCep.length !== 8) {
@@ -46,7 +47,7 @@ export const Address = () => {
       setIsUpdate(true)
 
       try {
-        await getAddressById(idAddress)
+        await getAddressById(idAddress, setAddressDatasUpdate)
       } catch(Error) {
         console.log(Error)
       }
@@ -83,60 +84,63 @@ export const Address = () => {
             estado: addressDatas && isUpdate ? addressDatas.estado : "",
             pais: addressDatas && isUpdate ? addressDatas.pais : "",
           }}
-          onSubmit={async (values, resetForm) => {
+          validationSchema={AddressSchema}
+          onSubmit={async (values, {resetForm}) => {
               isUpdate ? await handleUpdateAddress(values, idAddress, id) : await handleCreateAddress(values, id)
               resetForm()
           }}>
             {({errors, values, handleChange, setFieldValue }) => (
               <FormContent>
                 <div>
-                  <Label htmlFor="cep">Cep</Label>
+                  <Label htmlFor="cep">Cep *</Label>
                   <MaskInput mask={maskCep} name="cep" id="cep" value={values.cep} onChange={handleChange} onBlur={event => searchDatasAddress(event, setFieldValue)} placeholder="Digite seu cep"/> 
-                  <div>{errors.cep}</div>
+                  <TextValidation>{errors.cep}</TextValidation>
                 </div>
             
                 <div>
-                  <Label htmlFor="logradouro">Logradouro</Label>
+                  <Label htmlFor="logradouro">Logradouro *</Label>
                   <InputField name="logradouro" id="logradouro" placeholder="Digite Seu logradouro"/>
-                  <div>{errors.logradouro}</div>
+                  <TextValidation>{errors.logradouro}</TextValidation>
                 </div>
               
                 <div>
-                  <Label htmlFor="numero">Numero</Label>
-                  <Input name="numero" id="numero" placeholder="Digite Seu numero" type="number" value={values.numero} onChange={handleChange}/>
-                  <div>{errors.numero}</div>
+                  <Label htmlFor="numero">Numero *</Label>
+                  <Input name="numero" id="numero" placeholder="Digite Seu numero" value={values.numero} onChange={handleChange}/>
+                  <TextValidation>{errors.numero}</TextValidation>
                 </div>
           
                 <div>
                   <Label htmlFor="complemento">Complemento</Label>
-                  <InputField name="complemento" id="complemento" placeholder="Digite Seu complemento"/>
-                  <div>{errors.complemento}</div>
+                  <InputField name="complemento" id="complemento" placeholder="Digite Seu complemento (opicional)"/>
+                  <TextValidation>{errors.complemento}</TextValidation>
                 </div>
           
                 <div>
-                  <Label htmlFor="cidade">Cidade</Label>
+                  <Label htmlFor="cidade">Cidade *</Label>
                   <InputField name="cidade" placeholder="Digite Seu cidade"/>
-                  <div>{errors.cidade}</div>
+                  <TextValidation>{errors.cidade}</TextValidation>
                 </div>
           
                 <div>
-                  <Label htmlFor="estado">Estado</Label>
+                  <Label htmlFor="estado">Estado *</Label>
                   <InputField name="estado" placeholder="Digite Seu estado"/>
-                  <div>{errors.estado}</div>
+                  <TextValidation>{errors.estado}</TextValidation>
                 </div>
           
                 <div>
-                  <Label htmlFor="pais">Pais</Label>
-                  <Input name="pais" id="pais" placeholder="Digite Seu pais" value={values.pais} onChange={handleChange}/>
-                  <div>{errors.pais}</div>
+                  <Label htmlFor="pais">País *</Label>
+                  <Input name="pais" id="pais" placeholder="Digite Seu país" value={values.pais} onChange={handleChange}/>
+                  <TextValidation>{errors.pais}</TextValidation>
                 </div>
           
                 <div>
-                  <Label htmlFor="tipo">Tipo</Label>
-                  <Input name="tipo" id="tipo" placeholder="Digite Seu tipo" value={values.tipo} onChange={handleChange}/>
-                  <div>{errors.tipo}</div>
+                  <Label htmlFor="tipo">Tipo *</Label>
+                  <InputField name="tipo" id="tipo" component="select">
+                      <option value="residencial">residencial</option>
+                      <option value="comercial">comercial</option>
+                  </InputField>
                 </div>
-                <Button width="200px" type="submit">{isUpdate ? "Atualizar endereço" : "Criar Endereço"}</Button>
+                <Button type="submit">{isUpdate ? "Atualizar endereço" : "Criar Endereço"}</Button>
               </FormContent>
             )}
         </Formik>
