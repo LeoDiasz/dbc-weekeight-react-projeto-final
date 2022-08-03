@@ -26,7 +26,7 @@ const PersonSchema = Yup.object().shape({
     .required('Necessário preencher'),
   dataNascimento: Yup.string()
   .required('Necessário preencher')
-  .test("date", "data não é valida", date => moment(date, "DD/MM/YYYY").isValid()),
+  .test("date", "data não é valida", date => (moment(date, "DD/MM/YYYY").isValid()) && String(formatDataForOnlyNumbers(date)).length >= 8),
   cpf: Yup.string()
     .test("cpf", "cpf tem que ter 11 digitos", cpf => String(formatDataForOnlyNumbers(cpf)).length >= 11)
     .required('Necessário preencher'),
@@ -34,7 +34,7 @@ const PersonSchema = Yup.object().shape({
 
 const AddressSchema = Yup.object().shape({
   cep: Yup.string()
-    .test("cep", "Cep tem que possui 8 digitos", cep => String(formatDataForOnlyNumbers(cep)).length >= 8)
+    .test("cep", "Cep tem que possuir 8 digitos", cep => String(formatDataForOnlyNumbers(cep)).length >= 8)
     .required('Necessário preencher'),
   logradouro: Yup.string()
     .required('Necessário preencher'),
