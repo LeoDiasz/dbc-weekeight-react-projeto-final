@@ -17,6 +17,10 @@ const baseStylesSection = css`
   flex-direction: column;
   gap: ${props => props.gap ? props.gap : "100px"};
   padding: 40px;
+
+  @media (max-width: 576px) {
+    padding: 40px 15px;
+  }
 `
 
 const SectionPagesWithSideBar = styled.section`

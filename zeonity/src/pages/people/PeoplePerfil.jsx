@@ -5,27 +5,29 @@ import { ContainerPagesWithSideBar } from "../../components/ContainerPagesWithSi
 import { Loading } from "../../components/Loading"
 import { useContextAddress } from "../../hooks/useContextAddress"
 import {useContextPeople} from "../../hooks/useContextPeople"
+import { useContextContact } from "../../hooks/useContextContact"
 import { HeaderPages } from "../../components/HeaderPages/styles"
-import { ListAddress } from "./components/ListAddress"
+import { ListAddress } from "../AddressForm/components/ListAddress"
+import { ListContact } from "../ContactForm/components/ListContact"
 
 export const PeoplePerfil = () => {
-  const [personDatas, setPersonDatas] = useState()
-  const [loading, setLoading] = useState(true)
-  const {getAddressByIdPerson, listAddressOfPerson} = useContextAddress()
-  const {getPersonById} = useContextPeople()
   const {id} = useParams()
   const navigate = useNavigate()
+  const [personDatas, setPersonDatas] = useState()
+  const [loading, setLoading] = useState(true)
+  const {getPersonById} = useContextPeople()
+  const {getAddressByIdPerson, listAddressOfPerson} = useContextAddress()
+  const {getContactsByIdPerson, listContactsOfPerson} = useContextContact()
 
   const setup = async () => {
     await getAddressByIdPerson(id)
     await getPersonById(id, setPersonDatas)
+    await getContactsByIdPerson(id)
     setLoading(false)
   }
 
   useEffect(() => {
     setup()
-
-
   }, [])
 
   if(loading) {
@@ -41,6 +43,7 @@ export const PeoplePerfil = () => {
         <Button onClick={event => navigate("/people")}>Voltar</Button>
       </HeaderPages>
       <ListAddress listAddress={listAddressOfPerson} id={id}/>
+      <ListContact listContacts={listContactsOfPerson} id={id}/>
     </ContainerPagesWithSideBar>
   )
 }

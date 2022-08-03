@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom"
 import { AddressCardInfo } from '../../../components/AddressCardInfo'
-import { ListContainer } from "../styles"
+import { ListContainer } from "../../people/styles"
 import { Button } from "../../../components/Button/styles"
 
 export const ListAddress = ({listAddress, id}) => {

@@ -46,7 +46,7 @@ export const FormPeople = ({isUpdate, personDatasUpdate}) => {
             <InputField name="nome" id="nome" placeholder="Digite o nome da pessoa"/>
             <TextValidation>{errors.nome}</TextValidation>
           </div>
-
+          
           <div>
             <Label htmlFor="email">Email *</Label>
             <InputField type="email" name="email" id="email" placeholder="Digite o email"/>

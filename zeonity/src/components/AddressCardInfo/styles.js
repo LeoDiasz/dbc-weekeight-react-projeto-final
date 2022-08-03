@@ -1,15 +1,36 @@
 import styled from "styled-components"
-import { PersonContent } from "../PersonCardInfo/styles"
+import { baseStylesCard } from "../PersonCardInfo/styles"
 
-export const ListAddressContent = styled(PersonContent)`
-  display: grid;
+export const ListAddressContent = styled.li`
+  ${baseStylesCard}
   grid-template-columns: 1fr 1.5fr repeat(6, 1fr) 100px;
-  align-items: center;
-  justify-content: space-between;
-  height: 92px;
-  width: 100%;
-  padding: 0 40px;
-  text-align: center;
-  border-bottom: 1px solid var(--color-border);
-  transition: 0.3s;
+ 
+
+ @media(max-width: 1080px) {
+    grid-template-columns: repeat(8, 1fr);
+  
+    div {
+      justify-self: center;
+      grid-column: 1 / 9;
+    }
+  }
+
+  @media(max-width: 780px) {
+    grid-template-columns: repeat(6, 1fr);
+
+    h4:nth-child(4), h4:nth-child(5) {
+        display: none;
+      }
+  }
+
+  @media(max-width: 576px) {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    text-align: center;
+    
+    h4:nth-child(8) {
+        display: none;
+    }
+  }
+
 `

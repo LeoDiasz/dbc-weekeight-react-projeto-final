@@ -23,7 +23,9 @@ const ListContainer = styled(ContainerForFormAndLists)`
     text-align: center;
   }
 
-  
+  @media(max-width: 1080px) {
+    text-align: center;
+  }
 
 `
 

@@ -1,4 +1,5 @@
 import * as Yup from "yup"
+import moment from "moment"
 
 const CreateUserAndSignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -22,8 +23,8 @@ const PersonSchema = Yup.object().shape({
     .email("Email não é valido")
     .required('Necessário preencher'),
   dataNascimento: Yup.string()
-  .min(10, 'Minimo 8 caracteres na data')
-  .required('Necessário preencher'),
+  .required('Necessário preencher')
+  .test("date", "data não é valida", date => moment(date, "DD/MM/YYYY").isValid()),
   cpf: Yup.string()
     .required('Necessário preencher'),
 });
@@ -43,8 +44,16 @@ const AddressSchema = Yup.object().shape({
   .required('Necessário preencher'),
   tipo: Yup.string()
   .required('Necessário preencher'),
-  
-  
 });
 
-export {CreateUserAndSignupSchema, PersonSchema, AddressSchema}
+const ContactSchema = Yup.object().shape({
+  telefone: Yup.string()
+    .required('Necessário preencher'),
+  descricao: Yup.string()
+    .required('Necessário preencher'),
+  tipoContato: Yup.string()
+    .required('Necessário preencher'),
+});
+
+
+export {CreateUserAndSignupSchema, PersonSchema, AddressSchema, ContactSchema}
