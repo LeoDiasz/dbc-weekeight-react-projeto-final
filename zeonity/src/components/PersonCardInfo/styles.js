@@ -34,7 +34,8 @@ export const baseStylesCard = css`
     justify-content: inherit;
     text-align: center;
     gap: 10px;
-    height: 120px;
+    min-height: 120px;
+    height: auto;
     padding: 20px 10px;
     font-size: 0.8rem;
     
@@ -58,6 +59,12 @@ export const baseStylesCard = css`
 
 
 
+  }
+
+  @media(max-width: 576px) {
+    & + & {
+      word-break: break-word;
+    }
   }
 `
 
