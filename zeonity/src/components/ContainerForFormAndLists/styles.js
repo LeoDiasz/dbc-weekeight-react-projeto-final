@@ -12,7 +12,7 @@ export const ContainerForFormAndLists = styled.section`
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid var(--color-border);
-  min-width: 380px;
+  min-width: 300px;
 
   
 `

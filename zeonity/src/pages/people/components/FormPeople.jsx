@@ -55,7 +55,12 @@ export const FormPeople = ({isUpdate, personDatasUpdate}) => {
 
           <div>
             <Label htmlFor="cpf">Cpf *</Label>
-            <MaskInput name="cpf" id="cpf" mask={maskCpf} type="text" placeholder="Digite o cpf" onChange={handleChange} value={values.cpf}/>
+            <InputField 
+              name="cpf" 
+              render={ ({field}) => (
+                <MaskInput name="cpf" id="cpf" mask={maskCpf} type="text" {...field} placeholder="Digite o cpf"/>
+              )}/>
+    
             <TextValidation>{errors.cpf}</TextValidation>
           </div>
 

@@ -15,7 +15,10 @@ const formatDatePtBrForDefault = (date) => {
 }
 
 const formatDataForOnlyNumbers = (data) => {
-
+  if (!data) {
+    return
+  }
+  
   const newData = data.replace(maskOnlyNumbers, "")
 
   return newData

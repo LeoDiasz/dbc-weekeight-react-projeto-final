@@ -1,5 +1,7 @@
 import * as Yup from "yup"
 import moment from "moment"
+import { formatDataForOnlyNumbers } from "./formatDatas";
+
 
 const CreateUserAndSignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -26,11 +28,13 @@ const PersonSchema = Yup.object().shape({
   .required('Necessário preencher')
   .test("date", "data não é valida", date => moment(date, "DD/MM/YYYY").isValid()),
   cpf: Yup.string()
+    .test("cpf", "cpf tem que ter 11 digitos", cpf => String(formatDataForOnlyNumbers(cpf)).length >= 11)
     .required('Necessário preencher'),
 });
 
 const AddressSchema = Yup.object().shape({
   cep: Yup.string()
+    .test("cep", "Cep tem que possui 8 digitos", cep => String(formatDataForOnlyNumbers(cep)).length >= 8)
     .required('Necessário preencher'),
   logradouro: Yup.string()
     .required('Necessário preencher'),
@@ -48,8 +52,10 @@ const AddressSchema = Yup.object().shape({
 
 const ContactSchema = Yup.object().shape({
   telefone: Yup.string()
+    .test("telefone", "telefone tem que possuir no minimo 9 numeros", telefone => String(formatDataForOnlyNumbers(telefone)).length >= 11)
     .required('Necessário preencher'),
   descricao: Yup.string()
+    .max("20", "maximo 20 caracteres")
     .required('Necessário preencher'),
   tipoContato: Yup.string()
     .required('Necessário preencher'),
